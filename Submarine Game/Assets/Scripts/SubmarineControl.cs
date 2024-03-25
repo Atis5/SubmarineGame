@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -25,9 +26,39 @@ public class SubmarineControl : MonoBehaviour
     private float SubmarineSpeed;
     private Rigidbody rb;
 
+    [Header("Camera")]
+    [SerializeField] private Camera firstPersonCamera;
+    [SerializeField] private Camera thirdPersonCamera;
+    private bool firstPerson = true;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+    }
+
+    private void Update()
+    {
+        Debug.Log(SubmarineSpeed);
+        
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            firstPerson = !firstPerson;
+            ChangeCameraPerspective();
+        }
+    }
+
+    private void ChangeCameraPerspective()
+    {
+        if (firstPerson == true)
+        {
+            firstPersonCamera.gameObject.SetActive(true);
+            thirdPersonCamera.gameObject.SetActive(false);
+        } 
+        else 
+        {
+            firstPersonCamera.gameObject.SetActive(false);
+            thirdPersonCamera.gameObject.SetActive(true);
+        }
     }
 
     void FixedUpdate()
@@ -51,7 +82,7 @@ public class SubmarineControl : MonoBehaviour
             SubmarineSpeed -= Acceleration;
         }
         
-        if (Mathf.Abs(SubmarineSpeed) <= MinSpeed)
+        else if (Mathf.Abs(SubmarineSpeed) <= MinSpeed)
         {
             SubmarineSpeed = 0;
         }
