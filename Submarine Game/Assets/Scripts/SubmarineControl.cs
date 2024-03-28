@@ -27,13 +27,17 @@ public class SubmarineControl : MonoBehaviour
     private Rigidbody rb;
 
     [Header("Camera")]
-    [SerializeField] private Camera firstPersonCamera;
-    [SerializeField] private Camera thirdPersonCamera;
-    private bool firstPerson = true;
+    [SerializeField] private Camera FirstPersonCamera;
+    [SerializeField] private Camera ThirdPersonCamera;
+    private bool FirstPerson = true;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+
+        // Always start in first person.
+        FirstPersonCamera.gameObject.SetActive(true);
+        ThirdPersonCamera.gameObject.SetActive(false);
     }
 
     private void Update()
@@ -42,25 +46,10 @@ public class SubmarineControl : MonoBehaviour
         
         if (Input.GetKeyDown(KeyCode.C))
         {
-            firstPerson = !firstPerson;
+            FirstPerson = !FirstPerson;
             ChangeCameraPerspective();
         }
     }
-
-    private void ChangeCameraPerspective()
-    {
-        if (firstPerson == true)
-        {
-            firstPersonCamera.gameObject.SetActive(true);
-            thirdPersonCamera.gameObject.SetActive(false);
-        } 
-        else 
-        {
-            firstPersonCamera.gameObject.SetActive(false);
-            thirdPersonCamera.gameObject.SetActive(true);
-        }
-    }
-
     void FixedUpdate()
     {
         ForwardAndBackwardMovement();
@@ -69,6 +58,19 @@ public class SubmarineControl : MonoBehaviour
 
         // Submarine stabilization
         rb.MoveRotation(Quaternion.Slerp(rb.rotation, Quaternion.Euler(new Vector3(0, rb.rotation.eulerAngles.y, 0)), StabilizationSmoothing));
+    }
+    private void ChangeCameraPerspective()
+    {
+        if (FirstPerson == true)
+        {
+            FirstPersonCamera.gameObject.SetActive(true);
+            ThirdPersonCamera.gameObject.SetActive(false);
+        } 
+        else 
+        {
+            FirstPersonCamera.gameObject.SetActive(false);
+            ThirdPersonCamera.gameObject.SetActive(true);
+        }
     }
 
     private void ForwardAndBackwardMovement()
