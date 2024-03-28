@@ -3,8 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SubmarineControl : MonoBehaviour
+public class SubControl : MonoBehaviour
 {
+
+
     [Header("Properties")]
     [SerializeField] private float Acceleration;
     [SerializeField] private float MaxForwardSpeed;
@@ -21,33 +23,28 @@ public class SubmarineControl : MonoBehaviour
     public KeyCode TurnRight;
     public KeyCode Rise;
     public KeyCode Sink;
+    public KeyCode ChangeCamera;
 
     [Header("Necessary Variables")]
+    // "Main" allows us to reference this script in other scripts.
+    public static SubControl Main;
     private float SubmarineSpeed;
     private Rigidbody rb;
 
-    [Header("Camera")]
-    [SerializeField] private Camera FirstPersonCamera;
-    [SerializeField] private Camera ThirdPersonCamera;
-    private bool FirstPerson = true;
+
 
     void Start()
     {
+        Main = this;
         rb = GetComponent<Rigidbody>();
-
-        // Always start in first person.
-        FirstPersonCamera.gameObject.SetActive(true);
-        ThirdPersonCamera.gameObject.SetActive(false);
     }
 
     private void Update()
     {
         Debug.Log(SubmarineSpeed);
-        
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            FirstPerson = !FirstPerson;
-            ChangeCameraPerspective();
+
+        if (Input.GetKeyDown(ChangeCamera))
+        { 
         }
     }
     void FixedUpdate()
@@ -59,19 +56,7 @@ public class SubmarineControl : MonoBehaviour
         // Submarine stabilization
         rb.MoveRotation(Quaternion.Slerp(rb.rotation, Quaternion.Euler(new Vector3(0, rb.rotation.eulerAngles.y, 0)), StabilizationSmoothing));
     }
-    private void ChangeCameraPerspective()
-    {
-        if (FirstPerson == true)
-        {
-            FirstPersonCamera.gameObject.SetActive(true);
-            ThirdPersonCamera.gameObject.SetActive(false);
-        } 
-        else 
-        {
-            FirstPersonCamera.gameObject.SetActive(false);
-            ThirdPersonCamera.gameObject.SetActive(true);
-        }
-    }
+
 
     private void ForwardAndBackwardMovement()
     {
