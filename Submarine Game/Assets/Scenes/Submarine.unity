@@ -22482,9 +22482,10 @@ MonoBehaviour:
   MaxForwardSpeed: 30
   MaxBackwardSpeed: 20
   MinSpeed: 4
-  TurnSpeed: 5
+  TurnSpeed: 10
   RiseSpeed: 10
   StabilizationSmoothing: 0.1
+  BumpForce: 30
   Forward: 105
   Backward: 107
   TurnLeft: 106
@@ -22492,6 +22493,7 @@ MonoBehaviour:
   Rise: 273
   Sink: 274
   ChangeCamera: 99
+  SubmarineCollision: {fileID: 0}
 --- !u!54 &2058932888
 Rigidbody:
   m_ObjectHideFlags: 0
