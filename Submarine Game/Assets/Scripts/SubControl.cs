@@ -46,7 +46,7 @@ public class SubControl : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(SubmarineSpeed);
+        // Debug.Log(SubmarineSpeed);
 
         if (Input.GetKeyDown(ChangeCamera))
         { 

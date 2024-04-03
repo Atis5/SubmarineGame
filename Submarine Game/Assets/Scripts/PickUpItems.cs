@@ -5,6 +5,7 @@ using UnityEngine;
 public class PickUpItems : MonoBehaviour
 {
     public GameObject Submarine;
+    public GameObject SubmarineCollision;
     public Transform HoldPosition;
     public float PickUpRange;
     private GameObject HeldObject;
@@ -32,6 +33,7 @@ public class PickUpItems : MonoBehaviour
             {
                 if (AllowDropping == true)
                 {
+                    Debug.Log("Item has been dropped.");
                     StopClipping();
                     DropObject();
                 }
@@ -48,21 +50,17 @@ public class PickUpItems : MonoBehaviour
             HeldObjectRigidbody = PickableObject.GetComponent<Rigidbody>();
             HeldObjectRigidbody.isKinematic = true;
             HeldObjectRigidbody.transform.parent = HoldPosition.transform;
-            Physics.IgnoreCollision(HeldObject.GetComponent<Collider>(), Submarine.GetComponent<Collider>(), true);
+            Physics.IgnoreCollision(HeldObject.GetComponent<Collider>(), SubmarineCollision.GetComponent<Collider>(), true);
         }
     }
 
     void DropObject()
     {
-        Physics.IgnoreCollision(HeldObject.GetComponent<Collider>(), Submarine.GetComponent<Collider>(), false);
+        Physics.IgnoreCollision(HeldObject.GetComponent<Collider>(), SubmarineCollision.GetComponent<Collider>(), false);
         HeldObjectRigidbody.isKinematic = false;
         HeldObject.transform.parent = null;
         HeldObject = null;
         HeldObjectRigidbody.AddForce(transform.forward * 10);
-    }
-    void MoveObject()
-    {
-        HeldObject.transform.position = HoldPosition.transform.position;
     }
 
     void StopClipping()
