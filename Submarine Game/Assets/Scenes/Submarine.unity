@@ -22486,12 +22486,12 @@ MonoBehaviour:
   RiseSpeed: 10
   StabilizationSmoothing: 0.1
   BumpForce: 30
-  Forward: 105
-  Backward: 107
-  TurnLeft: 106
-  TurnRight: 108
-  Rise: 273
-  Sink: 274
+  Forward: 119
+  Backward: 115
+  TurnLeft: 97
+  TurnRight: 100
+  Rise: 304
+  Sink: 306
   ChangeCamera: 99
   SubmarineCollision: {fileID: 0}
 --- !u!54 &2058932888
