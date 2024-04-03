@@ -1202,9 +1202,10 @@ GameObject:
   - component: {fileID: 119761764}
   - component: {fileID: 119761763}
   - component: {fileID: 119761762}
-  m_Layer: 7
+  - component: {fileID: 119761766}
+  m_Layer: 0
   m_Name: Trash
-  m_TagString: Untagged
+  m_TagString: Pickable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1288,6 +1289,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &119761766
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 119761761}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &126488592
 GameObject:
   m_ObjectHideFlags: 0
@@ -5415,7 +5432,7 @@ GameObject:
   m_Component:
   - component: {fileID: 456322664}
   m_Layer: 0
-  m_Name: Hold Position
+  m_Name: Held Object Position
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17466,6 +17483,7 @@ GameObject:
   - component: {fileID: 1709568427}
   - component: {fileID: 1709568429}
   - component: {fileID: 1709568428}
+  - component: {fileID: 1709568430}
   m_Layer: 0
   m_Name: Camera 1st Person
   m_TagString: Untagged
@@ -17539,6 +17557,21 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!114 &1709568430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1709568426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76b5c5b2dc721f74e9326c922197524f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Submarine: {fileID: 2058932886}
+  HoldPosition: {fileID: 456322664}
+  PickUpRange: 10
 --- !u!1 &1714299786
 GameObject:
   m_ObjectHideFlags: 0

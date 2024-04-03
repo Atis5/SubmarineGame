@@ -6,6 +6,7 @@ TagManager:
   tags:
   - 1P Submarine
   - 3P Submarine
+  - Pickable
   layers:
   - Default
   - TransparentFX
