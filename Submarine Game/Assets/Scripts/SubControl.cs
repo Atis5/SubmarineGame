@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SubControl : MonoBehaviour
@@ -15,6 +16,8 @@ public class SubControl : MonoBehaviour
     [SerializeField] private float TurnSpeed;
     [SerializeField] private float RiseSpeed;
     [SerializeField] private float StabilizationSmoothing;
+    [SerializeField] private float BumpForce;
+    
 
     [Header("Controls")]
     public KeyCode Forward;
@@ -26,9 +29,11 @@ public class SubControl : MonoBehaviour
     public KeyCode ChangeCamera;
 
     [Header("Necessary Variables")]
-    // "Main" allows us to reference this script in other scripts.
+    public Collider SubmarineCollision;
+    // "public static SubControl Main" allows us to reference this script in other scripts.
     public static SubControl Main;
     private float SubmarineSpeed;
+    private float CurrentBumpForce;
     private Rigidbody rb;
 
 
@@ -99,6 +104,14 @@ public class SubControl : MonoBehaviour
         {
             rb.AddForce(transform.up * -RiseSpeed);
         }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        CurrentBumpForce = BumpForce * -SubmarineSpeed;
+        SubmarineSpeed = 0;
+        rb.AddForce(transform.forward * CurrentBumpForce);
+        CurrentBumpForce = 0;
     }
 
 }
