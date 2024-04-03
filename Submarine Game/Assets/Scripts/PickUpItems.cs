@@ -6,6 +6,8 @@ public class PickUpItems : MonoBehaviour
 {
     public GameObject Submarine;
     public GameObject SubmarineCollision;
+    public GameObject TrashBin;
+    public Transform TrashCollector;
     public Transform HoldPosition;
     public float PickUpRange;
     private GameObject HeldObject;
@@ -33,10 +35,16 @@ public class PickUpItems : MonoBehaviour
             {
                 if (AllowDropping == true)
                 {
-                    Debug.Log("Item has been dropped.");
                     StopClipping();
                     DropObject();
                 }
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            if (HeldObject != null)
+            {
+                SecureTrash();
             }
         }
     }
@@ -60,7 +68,6 @@ public class PickUpItems : MonoBehaviour
         HeldObjectRigidbody.isKinematic = false;
         HeldObject.transform.parent = null;
         HeldObject = null;
-        HeldObjectRigidbody.AddForce(transform.forward * 10);
     }
 
     void StopClipping()
@@ -70,7 +77,16 @@ public class PickUpItems : MonoBehaviour
         hits = Physics.RaycastAll(transform.position, transform.TransformDirection(Vector3.forward), ClippingRange);
         if (hits.Length > 1)
         {
-            HeldObject.transform.position = transform.position + new Vector3(0f, -0.5f, 0f);
+            HeldObject.transform.position = transform.position + new Vector3(0f, -5f, 0f);
         }
+    }
+
+    void SecureTrash()
+    {
+        Physics.IgnoreCollision(HeldObject.GetComponent<Collider>(), SubmarineCollision.GetComponent<Collider>(), false);
+        HeldObjectRigidbody.isKinematic = false;
+        HeldObject.transform.position = new Vector3(-8.56f, 5f, 15.41f);
+        HeldObjectRigidbody.useGravity = true;
+        HeldObject = null;
     }
 }
