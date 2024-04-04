@@ -81,7 +81,7 @@ public class PickUpItems : MonoBehaviour
         }
     }
 
-    void SecureTrash()
+    public void SecureTrash()
     {
         Physics.IgnoreCollision(HeldObject.GetComponent<Collider>(), SubmarineCollision.GetComponent<Collider>(), false);
         HeldObjectRigidbody.isKinematic = false;
