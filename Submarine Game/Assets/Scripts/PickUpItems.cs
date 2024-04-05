@@ -4,20 +4,26 @@ using UnityEngine;
 
 public class PickUpItems : MonoBehaviour
 {
-    public GameObject Submarine;
-    public GameObject SubmarineCollision;
-    public GameObject TrashBin;
-    public Transform TrashCollector;
-    public Transform HoldPosition;
-    public float PickUpRange;
-    private GameObject HeldObject;
-    private Rigidbody HeldObjectRigidbody;
-    private bool AllowDropping = true;
+    [Header ("Properties")]
+    public float PickUpRange; // How far you need to be from an item to pick it up.
+
+    [Header ("References")]
+    public GameObject Submarine; // Reference to our player.
+    public GameObject SubmarineCollision; // Reference to the collision of our player.
+    public Transform HoldPosition; // This is where items you pick up will be.
+    private GameObject HeldObject; // References whatever object player is holding.
+    private Rigidbody HeldObjectRigidbody; // Rigidbody reference.
+    public GameObject TrashBin; // Not used right now.
+    public Transform TrashCollector; // Not used right now.
+
+    [Header ("Necessary Variables")]
+    private bool AllowDropping = true; // If player holds anything, they can drop it. 
 
 
 
     void Update()
     {
+
         if (Input.GetKeyDown(KeyCode.E))
         {
             if (HeldObject == null)
