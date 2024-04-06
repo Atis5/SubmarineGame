@@ -27,6 +27,7 @@ public class SubControl : MonoBehaviour
     public KeyCode Rise;
     public KeyCode Sink;
     public KeyCode ChangeCamera;
+    public KeyCode PickUp;
 
     [Header("Necessary Variables")]
     public Collider SubmarineCollision;

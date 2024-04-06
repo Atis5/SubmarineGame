@@ -17,13 +17,17 @@ public class PickUpItems : MonoBehaviour
 
     [Header ("Necessary Variables")]
     private bool AllowDropping = true; // If player holds anything, they can drop it. 
+    public static PickUpItems PickUpScript;
 
 
+    private void Start()
+    {
+        PickUpScript = this;
+    }
 
     void Update()
     {
-
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(SubControl.Main.PickUp))
         {
             if (HeldObject == null)
             {
@@ -45,13 +49,6 @@ public class PickUpItems : MonoBehaviour
                 }
             }
         }
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            if (HeldObject != null)
-            {
-                SecureTrash();
-            }
-        }
     }
 
 
@@ -62,12 +59,13 @@ public class PickUpItems : MonoBehaviour
             HeldObject = PickableObject;
             HeldObjectRigidbody = PickableObject.GetComponent<Rigidbody>();
             HeldObjectRigidbody.isKinematic = true;
+            HeldObject.transform.position = HoldPosition.transform.position;
             HeldObjectRigidbody.transform.parent = HoldPosition.transform;
             Physics.IgnoreCollision(HeldObject.GetComponent<Collider>(), SubmarineCollision.GetComponent<Collider>(), true);
         }
     }
 
-    void DropObject()
+    public void DropObject()
     {
         Physics.IgnoreCollision(HeldObject.GetComponent<Collider>(), SubmarineCollision.GetComponent<Collider>(), false);
         HeldObjectRigidbody.isKinematic = false;
@@ -94,4 +92,6 @@ public class PickUpItems : MonoBehaviour
         HeldObjectRigidbody.useGravity = true;
         HeldObject = null;
     }
+
+
 }
