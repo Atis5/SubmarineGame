@@ -8,7 +8,6 @@ public class PickUpItems : MonoBehaviour
     public float PickUpRange; // How far you need to be from an item to pick it up.
 
     [Header ("References")]
-    public GameObject Submarine; // Reference to our player.
     public GameObject SubmarineCollision; // Reference to the collision of our player.
     public Transform HoldPosition; // This is where items you pick up will be.
     private GameObject HeldObject; // References whatever object player is holding.
@@ -91,7 +90,7 @@ public class PickUpItems : MonoBehaviour
     {
         Physics.IgnoreCollision(HeldObject.GetComponent<Collider>(), SubmarineCollision.GetComponent<Collider>(), false);
         HeldObjectRigidbody.isKinematic = false;
-        HeldObject.transform.position = new Vector3(-8.56f, 5f, 15.41f);
+        HeldObject.transform.position = TrashCollector.transform.position;
         HeldObjectRigidbody.useGravity = true;
         HeldObject = null;
     }
