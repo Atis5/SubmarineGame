@@ -19967,7 +19967,6 @@ GameObject:
   - component: {fileID: 1709568429}
   - component: {fileID: 1709568428}
   - component: {fileID: 1709568430}
-  - component: {fileID: 1709568431}
   m_Layer: 0
   m_Name: Camera 1st Person
   m_TagString: Untagged
@@ -20054,26 +20053,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PickUpRange: 50
+  MarkColor: {r: 0, g: 1, b: 0, a: 1}
   SubmarineCollision: {fileID: 1959821312}
   HoldPosition: {fileID: 456322664}
   TrashBin: {fileID: 953349325}
   TrashCollector: {fileID: 1648174586}
---- !u!114 &1709568431
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1709568426}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ef3d15f335d6d841ac6b073d32a7226, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxDistance: 50
-  lastObject: {fileID: 0}
-  lastObjectColor: {r: 0, g: 0, b: 0, a: 0}
-  isInteracting: 0
   MainCamera: {fileID: 1709568429}
 --- !u!1 &1714299786
 GameObject:
