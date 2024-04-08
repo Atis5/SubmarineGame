@@ -13,6 +13,8 @@ public class SubCamera : MonoBehaviour
 
     void Start()
     {
+        Cursor.visible = false;
+
         // Always start in first person.
         FirstPersonCamera.gameObject.SetActive(true);
         ThirdPersonCamera.gameObject.SetActive(false);
@@ -31,6 +33,7 @@ public class SubCamera : MonoBehaviour
     {
         if (FirstPerson == true)
         {
+            Cursor.lockState = CursorLockMode.Locked;
             FirstPersonCamera.gameObject.SetActive(true);
             ThirdPersonCamera.gameObject.SetActive(false);
         }
