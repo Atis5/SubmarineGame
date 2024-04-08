@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1368116686117329759}
   - component: {fileID: 1368116686117329758}
   - component: {fileID: 1368116686117329754}
+  - component: {fileID: 6520372402760515153}
   m_Layer: 0
   m_Name: Trash
   m_TagString: Pickable
@@ -115,3 +116,16 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &6520372402760515153
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1368116686117329757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83dfa325888985e49a6822b66d1ab445, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TrashCollector: {fileID: 0}
