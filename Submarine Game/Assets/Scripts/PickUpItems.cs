@@ -15,14 +15,14 @@ public class PickUpItems : MonoBehaviour
     private Rigidbody HeldObjectRigidbody; // Rigidbody reference.
     public GameObject TrashBin; // Not used right now.
     public Transform TrashCollector; // Not used right now.
-    public Camera MainCamera;
+    public Camera MainCamera; // 1st Person Camera reference
 
     [Header ("Necessary Variables")]
     private bool AllowDropping = true; // If player holds anything, they can drop it. 
-    public static PickUpItems PickUpScript;
-    private bool IsInteracting = false;
-    private GameObject LastObject;
-    private Color LastObjectColor;
+    public static PickUpItems PickUpScript; // Allows us to reference this script in other scripts.
+    private bool IsInteracting = false; // Needed for MarkPickabkleObjects method
+    private GameObject LastObject; // Needed for MarkPickabkleObjects method
+    private Color LastObjectColor; // Needed for MarkPickabkleObjects method
 
 
 
@@ -106,7 +106,7 @@ public class PickUpItems : MonoBehaviour
         Vector3 screenCentre = new Vector3(Screen.width / 2, Screen.height / 2, 0);
         Ray ray = MainCamera.ScreenPointToRay(screenCentre);
         RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, PickUpRange))
+        if ((Physics.Raycast(ray, out hit, PickUpRange)) && (HeldObject == null))
         {
             if (!IsInteracting)
             {
