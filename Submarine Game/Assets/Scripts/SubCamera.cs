@@ -22,7 +22,7 @@ public class SubCamera : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(SubControl.Main.ChangeCamera))
+        if (Input.GetKeyDown(Controls.ControlsScript.ChangeCamera))
         {
             FirstPerson = !FirstPerson;
             ChangeCameraPerspective();

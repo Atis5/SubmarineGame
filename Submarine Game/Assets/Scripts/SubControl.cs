@@ -17,21 +17,10 @@ public class SubControl : MonoBehaviour
     [SerializeField] private float RiseSpeed; // How fast the submarine goes up and down.
     [SerializeField] private float StabilizationSmoothing; // How fast the submarine will stabilize after being rotated.
     [SerializeField] private float BumpForce; // How far the submarine will be pushed away after hitting something.
-    
-
-    [Header("Controls")]
-    public KeyCode Forward;
-    public KeyCode Backward;
-    public KeyCode TurnLeft;
-    public KeyCode TurnRight;
-    public KeyCode Rise;
-    public KeyCode Sink;
-    public KeyCode ChangeCamera;
-    public KeyCode PickUp;
 
     [Header("Necessary Variables")]
     public Collider SubmarineCollision;
-    public static SubControl Main;
+    public static SubControl SubControlScript;
     private float SubmarineSpeed;
     private float CurrentBumpForce; 
     private Rigidbody rb;
@@ -40,7 +29,7 @@ public class SubControl : MonoBehaviour
 
     void Start()
     {
-        Main = this; // Allows us to reference this script in other scripts.
+        SubControlScript = this; // Allows us to reference this script in other scripts.
         rb = GetComponent<Rigidbody>(); // Necessary reference to the RigidBody.
     }
 
@@ -62,11 +51,11 @@ public class SubControl : MonoBehaviour
 
     private void ForwardAndBackwardMovement()
     {
-        if (Input.GetKey(Forward))
+        if (Input.GetKey(Controls.ControlsScript.Forward))
         {
             SubmarineSpeed += Acceleration;
         }
-        else if (Input.GetKey(Backward))
+        else if (Input.GetKey(Controls.ControlsScript.Backward))
         {
             SubmarineSpeed -= Acceleration;
         }
@@ -82,11 +71,11 @@ public class SubControl : MonoBehaviour
 
     private void Turning()
     {
-        if (Input.GetKey(TurnRight))
+        if (Input.GetKey(Controls.ControlsScript.TurnRight))
         {
             rb.AddTorque(transform.up * TurnSpeed);
         }
-        else if (Input.GetKey(TurnLeft))
+        else if (Input.GetKey(Controls.ControlsScript.TurnLeft))
         {
             rb.AddTorque(transform.up * -TurnSpeed);
         }
@@ -94,11 +83,11 @@ public class SubControl : MonoBehaviour
 
     private void RisingAndSinking()
     {
-        if (Input.GetKey(Rise))
+        if (Input.GetKey(Controls.ControlsScript.Rise))
         {
             rb.AddForce(transform.up * RiseSpeed);
         }
-        else if (Input.GetKey(Sink))
+        else if (Input.GetKey(Controls.ControlsScript.Sink))
         {
             rb.AddForce(transform.up * -RiseSpeed);
         }

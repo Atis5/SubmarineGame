@@ -35,7 +35,7 @@ public class PickUpItems : MonoBehaviour
     {
         MarkPickableObjects();
 
-        if (Input.GetKeyDown(SubControl.Main.PickUp))
+        if (Input.GetKeyDown(Controls.ControlsScript.PickUp))
         {
             RaycastHit hit;
             if (HeldObject == null)
@@ -59,7 +59,7 @@ public class PickUpItems : MonoBehaviour
         }
     }
 
-
+    
     void PickUpObject(GameObject PickableObject)
     {
         if (PickableObject.GetComponent<Rigidbody>())
@@ -73,6 +73,7 @@ public class PickUpItems : MonoBehaviour
         }
     }
 
+
     public void DropObject()
     {
         Physics.IgnoreCollision(HeldObject.GetComponent<Collider>(), SubmarineCollision.GetComponent<Collider>(), false);
@@ -81,6 +82,10 @@ public class PickUpItems : MonoBehaviour
         HeldObject = null;
     }
 
+
+    /// <summary>
+    /// Prevents recently held objects from clipping to the player model right after dropping them.
+    /// </summary>
     void StopClipping()
     {
         var ClippingRange = Vector3.Distance(HeldObject.transform.position, transform.position);
@@ -92,6 +97,10 @@ public class PickUpItems : MonoBehaviour
         }
     }
 
+
+    /// <summary>
+    /// Teleports trash items towards the trash bin.
+    /// </summary>
     public void SecureTrash()
     {
         Physics.IgnoreCollision(HeldObject.GetComponent<Collider>(), SubmarineCollision.GetComponent<Collider>(), false);
@@ -101,6 +110,9 @@ public class PickUpItems : MonoBehaviour
         HeldObject = null;
     }
 
+    /// <summary>
+    /// Creates a raycast from camera position and if the ray hits the object, it will change its color.
+    /// </summary>
     void MarkPickableObjects()
     {
         Vector3 screenCentre = new Vector3(Screen.width / 2, Screen.height / 2, 0);
