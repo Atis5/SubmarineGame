@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using TMPro;
 
 public class SubControl : MonoBehaviour
 {
@@ -10,18 +11,21 @@ public class SubControl : MonoBehaviour
 
     [Header("Properties")]
     [SerializeField] private float Acceleration; // How much will be added to the submarine speed every frame.
+                     public  float SubmarineSpeed = 0; // Influenced by Acceleration.
     [SerializeField] private float MaxForwardSpeed; // Submarine will not go faster than that.
     [SerializeField] private float MaxBackwardSpeed; // Submarine will not go faster than that.
-    [SerializeField] private float MinSpeed; // If the SubmarineSpeed is below MinSpeed, it will instantly stop instead of going very slowly.
+    [SerializeField] private float MinSpeed; // How slow can Submarine be before stopping.
     [SerializeField] private float TurnSpeed; // How fast the submarine goes left and right.
-    [SerializeField] private float RiseSpeed; // How fast the submarine goes up and down.
+    [SerializeField] private float RiseSpeed;   // How fast the submarine goes up and down.
     [SerializeField] private float StabilizationSmoothing; // How fast the submarine will stabilize after being rotated.
     [SerializeField] private float BumpForce; // How far the submarine will be pushed away after hitting something.
+
+    [Header("HUD")]
+    [SerializeField] private TextMeshProUGUI CurrentSpeedText;
 
     [Header("Necessary Variables")]
     public Collider SubmarineCollision; // Needed to make colliders work.
     public static SubControl SubControlScript; // Variable where the script reference is stored.
-    public float SubmarineSpeed; // Influenced by Acceleration.
     private float CurrentBumpForce; // Influenced by BumpForce
     private Rigidbody rb; // Reference to Rigidbody.
 
@@ -31,6 +35,7 @@ public class SubControl : MonoBehaviour
     {
         SubControlScript = this; // Allows to reference this script in other scripts.
         rb = GetComponent<Rigidbody>(); // References Rigidbody component.
+        CurrentSpeedText.text = SubmarineSpeed.ToString();
     }
 
 
@@ -73,6 +78,7 @@ public class SubControl : MonoBehaviour
         }
         
         SubmarineSpeed = Mathf.Clamp(SubmarineSpeed, -MaxBackwardSpeed, MaxForwardSpeed);
+        CurrentSpeedText.text = Mathf.Round(SubmarineSpeed / 10).ToString();
         rb.AddForce(transform.forward * SubmarineSpeed);
     }
 
