@@ -19,24 +19,28 @@ public class SubControl : MonoBehaviour
     [SerializeField] private float BumpForce; // How far the submarine will be pushed away after hitting something.
 
     [Header("Necessary Variables")]
-    public Collider SubmarineCollision;
-    public static SubControl SubControlScript;
-    private float SubmarineSpeed;
-    private float CurrentBumpForce; 
-    private Rigidbody rb;
+    public Collider SubmarineCollision; // Needed to make colliders work.
+    public static SubControl SubControlScript; // Variable where the script reference is stored.
+    public float SubmarineSpeed; // Influenced by Acceleration.
+    private float CurrentBumpForce; // Influenced by BumpForce
+    private Rigidbody rb; // Reference to Rigidbody.
 
 
 
     void Start()
     {
-        SubControlScript = this; // Allows us to reference this script in other scripts.
-        rb = GetComponent<Rigidbody>(); // Necessary reference to the RigidBody.
+        SubControlScript = this; // Allows to reference this script in other scripts.
+        rb = GetComponent<Rigidbody>(); // References Rigidbody component.
     }
 
-    private void Update()
+
+
+    /*private void Update()
     {
-        //Debug.Log(SubmarineSpeed);
-    }
+        Debug.Log(SubmarineSpeed);
+    }*/
+
+
 
     void FixedUpdate()
     {
@@ -49,8 +53,10 @@ public class SubControl : MonoBehaviour
     }
 
 
+
     private void ForwardAndBackwardMovement()
     {
+        // Submarine speed slowly increases by the amount of acceleration.
         if (Input.GetKey(Controls.ControlsScript.Forward))
         {
             SubmarineSpeed += Acceleration;
@@ -60,6 +66,7 @@ public class SubControl : MonoBehaviour
             SubmarineSpeed -= Acceleration;
         }
         
+        // Stops submarine if speed is less than minimum. This is to prevent Submarine from moving very slowly and annoying players.
         else if (Mathf.Abs(SubmarineSpeed) <= MinSpeed)
         {
             SubmarineSpeed = 0;
@@ -68,6 +75,8 @@ public class SubControl : MonoBehaviour
         SubmarineSpeed = Mathf.Clamp(SubmarineSpeed, -MaxBackwardSpeed, MaxForwardSpeed);
         rb.AddForce(transform.forward * SubmarineSpeed);
     }
+
+
 
     private void Turning()
     {
@@ -81,6 +90,8 @@ public class SubControl : MonoBehaviour
         }
     }
 
+
+
     private void RisingAndSinking()
     {
         if (Input.GetKey(Controls.ControlsScript.Rise))
@@ -93,6 +104,8 @@ public class SubControl : MonoBehaviour
         }
     }
 
+
+    // Bumping and tilting when hitting obstacles.
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag != "Pickable")
