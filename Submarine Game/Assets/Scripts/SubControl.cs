@@ -21,10 +21,13 @@ public class SubControl : MonoBehaviour
     [SerializeField] private float BumpForce; // How far the submarine will be pushed away after hitting something.
 
     [Header("HUD")]
-    [SerializeField] private TextMeshProUGUI CurrentSpeedText;
+    [SerializeField] private TextMeshProUGUI SubmarineSpeedText;
+    [SerializeField] private TextMeshProUGUI SubmarineDepthText;
 
     [Header("Necessary Variables")]
+    public GameObject Player;
     public Collider SubmarineCollision; // Needed to make colliders work.
+    private float SubmarineDepth;
     public static SubControl SubControlScript; // Variable where the script reference is stored.
     private float CurrentBumpForce; // Influenced by BumpForce
     private Rigidbody rb; // Reference to Rigidbody.
@@ -35,8 +38,10 @@ public class SubControl : MonoBehaviour
     {
         SubControlScript = this; // Allows to reference this script in other scripts.
         rb = GetComponent<Rigidbody>(); // References Rigidbody component.
-        CurrentSpeedText.text = SubmarineSpeed.ToString();
-    }
+        SubmarineDepth = Player.transform.position.y;
+        SubmarineDepthText.text = SubmarineDepth.ToString() + "m";
+        SubmarineSpeedText.text = SubmarineSpeed.ToString();
+    }   
 
 
 
@@ -52,6 +57,9 @@ public class SubControl : MonoBehaviour
         ForwardAndBackwardMovement();
         Turning();
         RisingAndSinking();
+
+        SubmarineDepth = Player.transform.position.y;
+        SubmarineDepthText.text = Mathf.Round(SubmarineDepth-1000).ToString() + " m";
 
         // Submarine stabilization
         rb.MoveRotation(Quaternion.Slerp(rb.rotation, Quaternion.Euler(new Vector3(0, rb.rotation.eulerAngles.y, 0)), StabilizationSmoothing));
@@ -78,7 +86,7 @@ public class SubControl : MonoBehaviour
         }
         
         SubmarineSpeed = Mathf.Clamp(SubmarineSpeed, -MaxBackwardSpeed, MaxForwardSpeed);
-        CurrentSpeedText.text = Mathf.Round(SubmarineSpeed / 10).ToString();
+        SubmarineSpeedText.text = Mathf.Round(SubmarineSpeed).ToString() + " km/h";
         rb.AddForce(transform.forward * SubmarineSpeed);
     }
 
