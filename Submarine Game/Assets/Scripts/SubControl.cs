@@ -23,11 +23,14 @@ public class SubControl : MonoBehaviour
     [Header("HUD")]
     [SerializeField] private TextMeshProUGUI SubmarineSpeedText;
     [SerializeField] private TextMeshProUGUI SubmarineDepthText;
+    [SerializeField] private TextMeshProUGUI ToxicityNumberText;
 
     [Header("Necessary Variables")]
     public GameObject Player;
     public Collider SubmarineCollision; // Needed to make colliders work.
     private float SubmarineDepth;
+    private bool IsInToxicArea = false;
+    private float ToxicityNumber = 10;
     public static SubControl SubControlScript; // Variable where the script reference is stored.
     private float CurrentBumpForce; // Influenced by BumpForce
     private Rigidbody rb; // Reference to Rigidbody.
@@ -41,6 +44,7 @@ public class SubControl : MonoBehaviour
         SubmarineDepth = Player.transform.position.y;
         SubmarineDepthText.text = SubmarineDepth.ToString() + "m";
         SubmarineSpeedText.text = SubmarineSpeed.ToString();
+        ToxicityNumberText.text = ToxicityNumber.ToString() + " TU";
     }   
 
 
@@ -58,8 +62,21 @@ public class SubControl : MonoBehaviour
         Turning();
         RisingAndSinking();
 
+        // Show submarine depth
         SubmarineDepth = Player.transform.position.y;
         SubmarineDepthText.text = Mathf.Round(SubmarineDepth-1000).ToString() + " m";
+
+        if ((IsInToxicArea == true) && (ToxicityNumber <= 100))
+        {
+            ToxicityNumber++;
+            // Show toxicity meter
+            ToxicityNumberText.text = ToxicityNumber.ToString() + " TU";
+        }
+        else if ((IsInToxicArea == false) && (ToxicityNumber >= 10))
+        {
+            ToxicityNumber--;
+            ToxicityNumberText.text = ToxicityNumber.ToString() + " TU";
+        }
 
         // Submarine stabilization
         rb.MoveRotation(Quaternion.Slerp(rb.rotation, Quaternion.Euler(new Vector3(0, rb.rotation.eulerAngles.y, 0)), StabilizationSmoothing));
@@ -130,6 +147,23 @@ public class SubControl : MonoBehaviour
             rb.AddTorque(transform.forward * -CurrentBumpForce * 2);
             rb.AddTorque(transform.up * -CurrentBumpForce);
             CurrentBumpForce = 0;
+        }
+    }
+
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Toxic")
+        {
+            IsInToxicArea = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "Toxic")
+        {
+            IsInToxicArea = false;
         }
     }
 

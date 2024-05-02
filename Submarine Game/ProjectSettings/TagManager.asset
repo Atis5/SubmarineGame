@@ -7,6 +7,7 @@ TagManager:
   - 1P Submarine
   - 3P Submarine
   - Pickable
+  - Toxic
   layers:
   - Default
   - TransparentFX
