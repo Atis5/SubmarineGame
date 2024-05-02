@@ -127,7 +127,8 @@ public class SubControl : MonoBehaviour
             CurrentBumpForce = BumpForce * -SubmarineSpeed;
             SubmarineSpeed = 0;
             rb.AddForce(transform.forward * CurrentBumpForce);
-            rb.AddTorque(transform.forward * -CurrentBumpForce);
+            rb.AddTorque(transform.forward * -CurrentBumpForce * 2);
+            rb.AddTorque(transform.up * -CurrentBumpForce);
             CurrentBumpForce = 0;
         }
     }
