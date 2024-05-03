@@ -28,6 +28,8 @@ public class SubControl : MonoBehaviour
     [Header("Necessary Variables")]
     public GameObject Player;
     public Collider SubmarineCollision; // Needed to make colliders work.
+    public GameObject ToxicityWarning;
+    private bool ToxicityWarningSwitch = true;
     private float SubmarineDepth;
     private bool IsInToxicArea = false;
     private float ToxicityNumber = 10;
@@ -58,28 +60,19 @@ public class SubControl : MonoBehaviour
 
     void FixedUpdate()
     {
+
+        // Movement
         ForwardAndBackwardMovement();
         Turning();
         RisingAndSinking();
 
-        // Show submarine depth
-        SubmarineDepth = Player.transform.position.y;
-        SubmarineDepthText.text = Mathf.Round(SubmarineDepth-1000).ToString() + " m";
-
-        if ((IsInToxicArea == true) && (ToxicityNumber <= 100))
-        {
-            ToxicityNumber++;
-            // Show toxicity meter
-            ToxicityNumberText.text = ToxicityNumber.ToString() + " TU";
-        }
-        else if ((IsInToxicArea == false) && (ToxicityNumber >= 10))
-        {
-            ToxicityNumber--;
-            ToxicityNumberText.text = ToxicityNumber.ToString() + " TU";
-        }
-
         // Submarine stabilization
         rb.MoveRotation(Quaternion.Slerp(rb.rotation, Quaternion.Euler(new Vector3(0, rb.rotation.eulerAngles.y, 0)), StabilizationSmoothing));
+
+        //HUD
+        ShowToxicity();
+        ShowDepth();
+
     }
 
 
@@ -135,6 +128,40 @@ public class SubControl : MonoBehaviour
         }
     }
 
+
+    private void ShowToxicity()
+    {
+        if ((IsInToxicArea == true) && (ToxicityNumber < 100))
+        {
+            ToxicityNumber += 0.2f;
+            // Show toxicity meter
+            ToxicityNumberText.text = Mathf.Round(ToxicityNumber).ToString() + " TU";
+        }
+        else if ((IsInToxicArea == false) && (ToxicityNumber > 10))
+        {
+            ToxicityNumber -= 0.2f;
+            ToxicityNumberText.text = Mathf.Round(ToxicityNumber).ToString() + " TU";
+        }
+
+        if (ToxicityNumber >= 100)
+        {
+            InvokeRepeating("ShowToxicityWarning", 2f, 2f);
+        }
+        
+    }
+
+    private void ShowToxicityWarning()
+    {
+        ToxicityWarning.SetActive(ToxicityWarningSwitch);
+        ToxicityWarningSwitch = !ToxicityWarningSwitch;
+    }
+
+    private void ShowDepth()
+    {
+        // Show submarine depth
+        SubmarineDepth = Player.transform.position.y;
+        SubmarineDepthText.text = Mathf.Round(SubmarineDepth - 1000).ToString() + " m";
+    }
 
     // Bumping and tilting when hitting obstacles.
     private void OnCollisionEnter(Collision collision)
