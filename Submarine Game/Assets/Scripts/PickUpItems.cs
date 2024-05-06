@@ -118,6 +118,7 @@ public class PickUpItems : MonoBehaviour
         Vector3 screenCentre = new Vector3(Screen.width / 2, Screen.height / 2, 0);
         Ray ray = MainCamera.ScreenPointToRay(screenCentre);
         RaycastHit hit;
+        Debug.DrawRay(transform.position, ray.direction * 1000, Color.magenta);
         if ((Physics.Raycast(ray, out hit, PickUpRange)) && (HeldObject == null))
         {
             if (!IsInteracting)
@@ -141,7 +142,6 @@ public class PickUpItems : MonoBehaviour
 
             }
         }
-        Debug.DrawRay(ray.origin, ray.direction * 1000, Color.magenta);
     }
 
 }

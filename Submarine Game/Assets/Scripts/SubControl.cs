@@ -29,7 +29,7 @@ public class SubControl : MonoBehaviour
     public GameObject Player;
     public Collider SubmarineCollision; // Needed to make colliders work.
     public GameObject ToxicityWarning;
-    private bool ToxicityWarningSwitch = true;
+    private bool ToxicityWarningIsActive = false;
     private float SubmarineDepth;
     private bool IsInToxicArea = false;
     private float ToxicityNumber = 10;
@@ -148,35 +148,31 @@ public class SubControl : MonoBehaviour
             ToxicityNumberText.text = Mathf.Round(ToxicityNumber).ToString() + " TU";
         }
 
-        if (ToxicityNumber >= 100)
+        if (ToxicityNumber >= 100 && ToxicityWarningIsActive == false)
         {
             //InvokeRepeating("ShowToxicityWarning", 1f, 1f);
-            ShowToxicityBlink();
+            //ShowToxicityBlink();
+            StartCoroutine(ShowToxicityBlink());
+            ToxicityWarningIsActive = true;
         }
         
     }
 
-    private void ShowToxicityWarning()
+    /*private void ShowToxicityWarning()
     {
-            ToxicityWarning.SetActive(ToxicityWarningSwitch);
+            ToxicityWarning.SetActive(ToxicityWarningIsActive);
+            ToxicityWarningIsActive = !ToxicityWarningIsActive;
 
-    }
+    }*/
 
     private IEnumerator ShowToxicityBlink()
     {
-        while (ToxicityWarning)
-        {
-            if (ToxicityWarning.activeInHierarchy)
-            {
-                ToxicityWarning.SetActive(false);
-            }
-            else
-            {
-                ToxicityWarning.SetActive(true);
-            }
-            yield return new WaitForSeconds(0.5f);
-        }
-        yield break;
+        Debug.Log("Toxicity Warning!");
+        ToxicityWarning.SetActive(true);
+        yield return new WaitForSeconds(0.5f);
+        ToxicityWarning.SetActive(false);
+        yield return new WaitForSeconds(0.5f);
+        ToxicityWarningIsActive = false;
     }
 
     private void ShowDepth()
