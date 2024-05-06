@@ -73,6 +73,11 @@ public class SubControl : MonoBehaviour
         ShowToxicity();
         ShowDepth();
 
+        if (Input.GetKey(KeyCode.X))
+        {
+            ToxicityNumber += 10;
+        }
+
     }
 
 
@@ -145,15 +150,33 @@ public class SubControl : MonoBehaviour
 
         if (ToxicityNumber >= 100)
         {
-            InvokeRepeating("ShowToxicityWarning", 2f, 2f);
+            //InvokeRepeating("ShowToxicityWarning", 1f, 1f);
+            ShowToxicityBlink();
         }
         
     }
 
     private void ShowToxicityWarning()
     {
-        ToxicityWarning.SetActive(ToxicityWarningSwitch);
-        ToxicityWarningSwitch = !ToxicityWarningSwitch;
+            ToxicityWarning.SetActive(ToxicityWarningSwitch);
+
+    }
+
+    private IEnumerator ShowToxicityBlink()
+    {
+        while (ToxicityWarning)
+        {
+            if (ToxicityWarning.activeInHierarchy)
+            {
+                ToxicityWarning.SetActive(false);
+            }
+            else
+            {
+                ToxicityWarning.SetActive(true);
+            }
+            yield return new WaitForSeconds(0.5f);
+        }
+        yield break;
     }
 
     private void ShowDepth()
