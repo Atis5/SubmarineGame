@@ -9,6 +9,7 @@ public class SubCamera : MonoBehaviour
     [Header("Camera")]
     [SerializeField] private Camera FirstPersonCamera;
     [SerializeField] private Camera ThirdPersonCamera;
+    [SerializeField] private GameObject HUD;
     private bool FirstPerson = true;
 
     void Start()
@@ -41,11 +42,13 @@ public class SubCamera : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
             FirstPersonCamera.gameObject.SetActive(true);
             ThirdPersonCamera.gameObject.SetActive(false);
+            HUD.SetActive(true);
         }
         else
         {
             FirstPersonCamera.gameObject.SetActive(false);
             ThirdPersonCamera.gameObject.SetActive(true);
+            HUD.SetActive(false);
         }
     }
 

@@ -33520,6 +33520,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FirstPersonCamera: {fileID: 1709568429}
   ThirdPersonCamera: {fileID: 1051854229}
+  HUD: {fileID: 1929409151}
 --- !u!114 &2058932891
 MonoBehaviour:
   m_ObjectHideFlags: 0
