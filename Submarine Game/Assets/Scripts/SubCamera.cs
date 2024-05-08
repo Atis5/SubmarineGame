@@ -24,7 +24,12 @@ public class SubCamera : MonoBehaviour
     {
         if (Input.GetKeyDown(Controls.ControlsScript.ChangeCamera))
         {
-            FirstPerson = !FirstPerson;
+            FirstPerson = false;
+            ChangeCameraPerspective();
+        }
+        if (Input.GetKeyUp(Controls.ControlsScript.ChangeCamera))
+        {
+            FirstPerson = true;
             ChangeCameraPerspective();
         }
     }
