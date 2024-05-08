@@ -29,7 +29,7 @@ public class SubControl : MonoBehaviour
     public GameObject Player;
     public Collider SubmarineCollision; // Needed to make colliders work.
     public GameObject ToxicityWarning;
-    private bool ToxicityWarningIsActive = false;
+    private bool ToxicityWarningIsActive = false;  // Checks if the method is running.
     private float SubmarineDepth;
     private bool IsInToxicArea = false;
     private float ToxicityNumber = 10;
@@ -73,6 +73,8 @@ public class SubControl : MonoBehaviour
         ShowToxicity();
         ShowDepth();
 
+
+        // Adding toxicity for debugging purposes.
         if (Input.GetKey(KeyCode.X))
         {
             ToxicityNumber += 10;
@@ -93,12 +95,21 @@ public class SubControl : MonoBehaviour
         {
             SubmarineSpeed -= Acceleration;
         }
-        
+        else if (SubmarineSpeed > 0)
+        {
+            SubmarineSpeed--;
+        }
+        else if (SubmarineSpeed < 0)
+        {
+            SubmarineSpeed++;
+        }
+
         // Stops submarine if speed is less than minimum. This is to prevent Submarine from moving very slowly and annoying players.
-        else if (Mathf.Abs(SubmarineSpeed) <= MinSpeed)
+        /*else if (Mathf.Abs(SubmarineSpeed) <= MinSpeed)
         {
             SubmarineSpeed = 0;
         }
+        */
         
         SubmarineSpeed = Mathf.Clamp(SubmarineSpeed, -MaxBackwardSpeed, MaxForwardSpeed);
         SubmarineSpeedText.text = Mathf.Round(SubmarineSpeed).ToString() + " km/h";
