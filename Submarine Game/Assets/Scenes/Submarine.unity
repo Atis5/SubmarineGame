@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028326, g: 0.22571333, b: 0.30692202, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -10927,8 +10927,9 @@ GameObject:
   - component: {fileID: 710266351}
   - component: {fileID: 710266350}
   - component: {fileID: 710266349}
+  - component: {fileID: 710266354}
   m_Layer: 0
-  m_Name: Cylinder
+  m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10948,6 +10949,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetposition: {fileID: 2058932889}
   direction: 5
+  target: 0
+  enemydelay: 0
+  targetpos: {x: 0, y: 0, z: 0}
+  MinPosition: {x: 0, y: 0, z: 0}
+  MaxPosition: {x: 60, y: 20, z: 60}
+  RandomPosition: {x: 0, y: 0, z: 0}
 --- !u!136 &710266350
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -11028,6 +11035,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &710266354
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710266348}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.2066135, y: 2.188756, z: 1.2242723}
+  m_Center: {x: 0.0040607452, y: -0.0168252, z: -0.013422728}
 --- !u!1 &720339529
 GameObject:
   m_ObjectHideFlags: 0
@@ -31119,7 +31139,7 @@ GameObject:
   - component: {fileID: 1959821314}
   m_Layer: 0
   m_Name: Collision
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
