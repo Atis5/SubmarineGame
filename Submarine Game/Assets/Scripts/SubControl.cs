@@ -19,11 +19,13 @@ public class SubControl : MonoBehaviour
     [SerializeField] private float RiseSpeed;   // How fast the submarine goes up and down.
     [SerializeField] private float StabilizationSmoothing; // How fast the submarine will stabilize after being rotated.
     [SerializeField] private float BumpForce; // How far the submarine will be pushed away after hitting something.
+    [SerializeField] private float MaxHealth;
 
     [Header("HUD")]
     [SerializeField] private TextMeshProUGUI SubmarineSpeedText;
     [SerializeField] private TextMeshProUGUI SubmarineDepthText;
     [SerializeField] private TextMeshProUGUI ToxicityNumberText;
+    [SerializeField] private TextMeshProUGUI HealthNumberText;
 
     [Header("Necessary Variables")]
     public GameObject Player;
@@ -35,6 +37,7 @@ public class SubControl : MonoBehaviour
     private float ToxicityNumber = 10;
     public static SubControl SubControlScript; // Variable where the script reference is stored.
     private float CurrentBumpForce; // Influenced by BumpForce
+    private float CurrentHealth;
     private Rigidbody rb; // Reference to Rigidbody.
 
 
@@ -47,6 +50,8 @@ public class SubControl : MonoBehaviour
         SubmarineDepthText.text = SubmarineDepth.ToString() + "m";
         SubmarineSpeedText.text = SubmarineSpeed.ToString();
         ToxicityNumberText.text = ToxicityNumber.ToString() + " TU";
+        CurrentHealth = MaxHealth;
+        HealthNumberText.text = CurrentHealth.ToString();
     }   
 
 
@@ -72,7 +77,7 @@ public class SubControl : MonoBehaviour
         //HUD
         ShowToxicity();
         ShowDepth();
-
+        MaxAndMinHealth();
 
         // Adding toxicity for debugging purposes.
         if (Input.GetKey(KeyCode.X))
@@ -159,12 +164,19 @@ public class SubControl : MonoBehaviour
             ToxicityNumberText.text = Mathf.Round(ToxicityNumber).ToString() + " TU";
         }
 
-        if (ToxicityNumber >= 100 && ToxicityWarningIsActive == false)
+        if (ToxicityNumber >= 100)
         {
-            //InvokeRepeating("ShowToxicityWarning", 1f, 1f);
-            //ShowToxicityBlink();
-            StartCoroutine(ShowToxicityBlink());
-            ToxicityWarningIsActive = true;
+            if (CurrentHealth > 0)
+            {
+                CurrentHealth -= 0.05f;
+                HealthNumberText.text = Mathf.Round(CurrentHealth).ToString();
+
+            }
+            if (ToxicityWarningIsActive == false)
+            {
+                StartCoroutine(ShowToxicityBlink());
+                ToxicityWarningIsActive = true;
+            }
         }
         
     }
@@ -193,12 +205,27 @@ public class SubControl : MonoBehaviour
         SubmarineDepthText.text = Mathf.Round(SubmarineDepth - 1000).ToString() + " m";
     }
 
+
+    private void MaxAndMinHealth()
+        {
+            if (CurrentHealth < 0)
+            {
+                CurrentHealth = 0;
+            }
+            if (CurrentHealth > MaxHealth)
+            {
+                CurrentHealth = MaxHealth;
+            }
+        }
+
     // Bumping and tilting when hitting obstacles.
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag != "Pickable")
         {
             CurrentBumpForce = BumpForce * -SubmarineSpeed;
+            CurrentHealth += CurrentBumpForce/100;
+            HealthNumberText.text = Mathf.Round(CurrentHealth).ToString();
             SubmarineSpeed = 0;
             rb.AddForce(transform.forward * CurrentBumpForce);
             rb.AddTorque(transform.forward * -CurrentBumpForce * 2);
