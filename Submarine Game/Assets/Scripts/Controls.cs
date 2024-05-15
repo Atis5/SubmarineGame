@@ -15,7 +15,7 @@ public class Controls : MonoBehaviour
     public KeyCode Sink;
     public KeyCode ChangeCamera;
     public KeyCode PickUp;
-
+    public KeyCode Defense; 
 
     // Start is called before the first frame update
     void Start()
@@ -23,3 +23,4 @@ public class Controls : MonoBehaviour
         ControlsScript = this; // Allows us to reference this script in other scripts.
     }
 }
+
