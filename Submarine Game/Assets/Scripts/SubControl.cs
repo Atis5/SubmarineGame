@@ -95,10 +95,18 @@ public class SubControl : MonoBehaviour
         if (Input.GetKey(Controls.ControlsScript.Forward))
         {
             SubmarineSpeed += Acceleration;
+            if (SubmarineSpeed < 0)
+            {
+                SubmarineSpeed++;
+            }
         }
         else if (Input.GetKey(Controls.ControlsScript.Backward))
         {
             SubmarineSpeed -= Acceleration;
+            if (SubmarineSpeed > 0)
+                {
+                    SubmarineSpeed--;
+                }
         }
         else if (SubmarineSpeed > 0)
         {
@@ -117,7 +125,7 @@ public class SubControl : MonoBehaviour
         */
         
         SubmarineSpeed = Mathf.Clamp(SubmarineSpeed, -MaxBackwardSpeed, MaxForwardSpeed);
-        SubmarineSpeedText.text = Mathf.Round(SubmarineSpeed).ToString() + " km/h";
+        SubmarineSpeedText.text = Mathf.Round(SubmarineSpeed / 10).ToString() + " kn";
         rb.AddForce(transform.forward * SubmarineSpeed);
     }
 
