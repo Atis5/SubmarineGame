@@ -11,6 +11,8 @@ public class Controls : MonoBehaviour
     public KeyCode Backward;
     public KeyCode TurnLeft;
     public KeyCode TurnRight;
+    public KeyCode TurnUp;
+    public KeyCode TurnDown;
     public KeyCode Rise;
     public KeyCode Sink;
     public KeyCode ChangeCamera;

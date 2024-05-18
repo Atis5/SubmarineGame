@@ -11,7 +11,6 @@ public class SubControl : MonoBehaviour
 
     [Header("Properties")]
     [SerializeField] private float Acceleration; // How much will be added to the submarine speed every frame.
-                     public  float SubmarineSpeed = 0; // Influenced by Acceleration.
     [SerializeField] private float MaxForwardSpeed; // Submarine will not go faster than that.
     [SerializeField] private float MaxBackwardSpeed; // Submarine will not go faster than that.
     [SerializeField] private float MinSpeed; // How slow can Submarine be before stopping.
@@ -19,7 +18,7 @@ public class SubControl : MonoBehaviour
     [SerializeField] private float RiseSpeed;   // How fast the submarine goes up and down.
     [SerializeField] private float StabilizationSmoothing; // How fast the submarine will stabilize after being rotated.
     [SerializeField] private float BumpForce; // How far the submarine will be pushed away after hitting something.
-    [SerializeField] private float MaxHealth;
+    [SerializeField] private float MaxHealth; // Player starts with this health and cannot heal above it.
 
     [Header("HUD")]
     [SerializeField] private TextMeshProUGUI SubmarineSpeedText;
@@ -29,16 +28,17 @@ public class SubControl : MonoBehaviour
 
     [Header("Necessary Variables")]
     public GameObject Player;
-    public Collider SubmarineCollision; // Needed to make colliders work.
     public GameObject ToxicityWarning;
-    private bool ToxicityWarningIsActive = false;  // Checks if the method is running.
-    private float SubmarineDepth;
-    private bool IsInToxicArea = false;
-    private float ToxicityNumber = 10;
+    public Collider SubmarineCollision; // Needed to make colliders work.
+    private Rigidbody rb; // Reference to Rigidbody.
     public static SubControl SubControlScript; // Variable where the script reference is stored.
+    private bool ToxicityWarningIsActive = false;  // Checks if the method is running.
+    private bool IsInToxicArea = false;
+    public  float SubmarineSpeed = 0; // Influenced by Acceleration.
+    private float SubmarineDepth;
+    private float ToxicityNumber = 10;
     private float CurrentBumpForce; // Influenced by BumpForce
     private float CurrentHealth;
-    private Rigidbody rb; // Reference to Rigidbody.
 
 
 
@@ -55,14 +55,6 @@ public class SubControl : MonoBehaviour
     }   
 
 
-
-    /*private void Update()
-    {
-        Debug.Log(SubmarineSpeed);
-    }*/
-
-
-
     void FixedUpdate()
     {
 
@@ -71,8 +63,7 @@ public class SubControl : MonoBehaviour
         Turning();
         RisingAndSinking();
 
-        // Submarine stabilization
-        rb.MoveRotation(Quaternion.Slerp(rb.rotation, Quaternion.Euler(new Vector3(0, rb.rotation.eulerAngles.y, 0)), StabilizationSmoothing));
+
 
         //HUD
         ShowToxicity();
@@ -133,13 +124,27 @@ public class SubControl : MonoBehaviour
 
     private void Turning()
     {
-        if (Input.GetKey(Controls.ControlsScript.TurnRight))
+        if ((Input.GetKey(Controls.ControlsScript.TurnUp)) && transform.rotation.x > -90)
+        {
+            rb.AddTorque(transform.right * -TurnSpeed);
+        }
+        else if ((Input.GetKey(Controls.ControlsScript.TurnDown)) && transform.rotation.x < 90)
+        {
+            rb.AddTorque(transform.right * TurnSpeed);
+        }
+        else if (Input.GetKey(Controls.ControlsScript.TurnRight))
         {
             rb.AddTorque(transform.up * TurnSpeed);
         }
         else if (Input.GetKey(Controls.ControlsScript.TurnLeft))
         {
             rb.AddTorque(transform.up * -TurnSpeed);
+
+        }
+        else
+        {
+            // Submarine stabilization
+            rb.MoveRotation(Quaternion.Slerp(rb.rotation, Quaternion.Euler(new Vector3(0, rb.rotation.eulerAngles.y, 0)), StabilizationSmoothing));
         }
     }
 
