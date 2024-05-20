@@ -4,16 +4,19 @@ using UnityEngine;
 using UnityEngine.UI;
 public class DefensesSystemPlayer : MonoBehaviour
 {
-    public EnemyMovement[] enemies;
+    public static DefensesSystemPlayer defensesSystemPlayer;
+    public List<GameObject> enemies;
     public Image WarningScreen;
     void Start()
     {
-        
+        defensesSystemPlayer = this;
+        WarningScreen.enabled = false;
     }
 
 
     void Update()
     {
+        
         Defense();
     }
     public void Defense()
@@ -21,19 +24,24 @@ public class DefensesSystemPlayer : MonoBehaviour
         foreach(var target in enemies)
         {
                 EnemyMovement obj = target.GetComponent<EnemyMovement>();
-            if (obj.target == true)
+            float AlertDistance = Vector3.Distance(transform.position, target.transform.position);
+            Debug.Log(AlertDistance);
+            if (AlertDistance<15)
             {
                 WarningScreen.enabled = true;
                 if (Input.GetKeyDown(Controls.ControlsScript.Defense))
                 {
-                    obj.target = false;
+                    enemies.Remove(target);
+                    obj.dies = true;
+                    EnemySpawner.enemySpawner.IsSpawning = true;
                 }
+
             }
             else
             {
                 WarningScreen.enabled = false;
             }
-         
+
         }
         
     }

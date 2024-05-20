@@ -5,7 +5,8 @@ using DG.Tweening;
 
 public class EnemyMovement : MonoBehaviour
 {
-    public Transform targetposition;
+    public bool dies;
+    public GameObject targetposition;
     public float direction;
     public bool target;
     public float enemydelay;
@@ -17,12 +18,14 @@ public class EnemyMovement : MonoBehaviour
     public Rigidbody rb;
     void Start()
     {
+        targetposition = GameObject.Find("Player");
         target = true;
     }
 
   
     void Update()
     {
+        DestroyEnemy();
         move();
        // Charging();
     }
@@ -30,18 +33,19 @@ public class EnemyMovement : MonoBehaviour
     {
         
 
-        float StoppingDistance = Vector3.Distance(transform.position, targetposition.position);
+        float StoppingDistance = Vector3.Distance(transform.position, targetposition.transform.position);
         
         
             if (target)
              
             {
-                
-                Vector3 targetdirection = targetposition.position - transform.position;
+          
+            // GameObject Player = GameObject.Find("Player"); 
+            Vector3 targetdirection = targetposition.transform.position - transform.position;
                 Quaternion targetrotation = Quaternion.LookRotation(targetdirection);
                 transform.rotation = Quaternion.Lerp(transform.rotation, targetrotation, Time.deltaTime);
 
-                targetpos = targetposition.position;
+                targetpos = targetposition.transform.position;
                 transform.DOMove(targetpos, direction).SetSpeedBased(true);
                 
                 }
@@ -72,13 +76,14 @@ public class EnemyMovement : MonoBehaviour
             }
     public void Charging()
     {
-        float StoppingDistance = Vector3.Distance(transform.position, targetposition.position);
+        float StoppingDistance = Vector3.Distance(transform.position, targetposition.transform.position);
         if (target)
         {
-            Vector3 targetdirection =targetposition.position - transform.position;
+
+            Vector3 targetdirection =targetposition.transform.position - transform.position;
             Quaternion targetrotation = Quaternion.LookRotation(targetdirection);
             transform.rotation = Quaternion.Lerp(transform.rotation, targetrotation, Time.deltaTime);
-            targetpos = targetposition.position;
+            targetpos = targetposition.transform.position;
             rb.AddForce(targetdirection * direction, ForceMode.Impulse);
         }
         else
@@ -99,10 +104,24 @@ public class EnemyMovement : MonoBehaviour
             }
         }
     }
+    private void DestroyEnemy()
+    {
+        if (dies)
+        {
+            DefensesSystemPlayer.defensesSystemPlayer.WarningScreen.enabled = false;
+            Destroy(this.gameObject);
+        }
+      
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
+            //if (target)
+            //{
+               // SubControl.SubControlScript.CurrentHealth -= 20;
+           // }
+           
             target = false;
              RandomPosition = GetRandomPosition();
         }
