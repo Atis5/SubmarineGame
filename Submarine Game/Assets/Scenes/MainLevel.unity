@@ -3506,6 +3506,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72f743be01a044439b36509136e72f8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dies: 0
   targetposition: {fileID: 1747172336}
   direction: 3
   target: 0
@@ -6473,7 +6474,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemies:
-  - {fileID: 905396098}
+  - {fileID: 0}
   WarningScreen: {fileID: 1730440079}
 --- !u!114 &1747172338
 MonoBehaviour:
@@ -6529,10 +6530,10 @@ MonoBehaviour:
   MaxForwardSpeed: 100
   MaxBackwardSpeed: 50
   MinSpeed: 15
-  TurnSpeed: 30
+  TurnSpeed: 50
   RiseSpeed: 30
-  StabilizationSmoothing: 0.05
-  BumpForce: 20
+  StabilizationSmoothing: 0.1
+  BumpForce: 50
   MaxHealth: 100
   SubmarineSpeedText: {fileID: 401518350}
   SubmarineDepthText: {fileID: 592805397}
@@ -6552,7 +6553,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 5
   m_Drag: 1
-  m_AngularDrag: 1
+  m_AngularDrag: 3
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0

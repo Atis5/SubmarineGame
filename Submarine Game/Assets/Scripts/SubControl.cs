@@ -132,7 +132,8 @@ public class SubControl : MonoBehaviour
         {
             rb.AddTorque(transform.right * TurnSpeed);
         }
-        else if (Input.GetKey(Controls.ControlsScript.TurnRight))
+        
+        if (Input.GetKey(Controls.ControlsScript.TurnRight))
         {
             rb.AddTorque(transform.up * TurnSpeed);
         }
@@ -141,11 +142,9 @@ public class SubControl : MonoBehaviour
             rb.AddTorque(transform.up * -TurnSpeed);
 
         }
-        else
-        {
+
             // Submarine stabilization
-            rb.MoveRotation(Quaternion.Slerp(rb.rotation, Quaternion.Euler(new Vector3(0, rb.rotation.eulerAngles.y, 0)), StabilizationSmoothing));
-        }
+            rb.MoveRotation(Quaternion.Slerp(rb.rotation, Quaternion.Euler(new Vector3(rb.rotation.eulerAngles.x, rb.rotation.eulerAngles.y, 0)), StabilizationSmoothing));
     }
 
 
