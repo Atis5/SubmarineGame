@@ -29615,8 +29615,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1803463312}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.71, z: 0.1}
-  m_LocalScale: {x: 3.6, y: 2.95, z: 6.93}
+  m_LocalPosition: {x: 0, y: 2.66, z: 1.24}
+  m_LocalScale: {x: 3.6, y: 2.95, z: 4.873831}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1631832734}
@@ -33662,8 +33662,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Forward: 119
   Backward: 115
-  TurnLeft: 97
-  TurnRight: 100
+  TurnLeft: 276
+  TurnRight: 275
+  TurnUp: 273
+  TurnDown: 274
   Rise: 32
   Sink: 304
   ChangeCamera: 9
@@ -33696,23 +33698,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad5a0e930f92b454190921d911f72bec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Acceleration: 0.5
-  SubmarineSpeed: 0
-  MaxForwardSpeed: 160
+  Acceleration: 0.2
+  MaxForwardSpeed: 100
   MaxBackwardSpeed: 50
   MinSpeed: 15
-  TurnSpeed: 40
-  RiseSpeed: 25
-  StabilizationSmoothing: 0.1
-  BumpForce: 30
+  TurnSpeed: 30
+  RiseSpeed: 30
+  StabilizationSmoothing: 0.05
+  BumpForce: 20
   MaxHealth: 100
   SubmarineSpeedText: {fileID: 291968087}
   SubmarineDepthText: {fileID: 795142155}
   ToxicityNumberText: {fileID: 2026554709}
   HealthNumberText: {fileID: 1195102740}
   Player: {fileID: 2062519431}
-  SubmarineCollision: {fileID: 1803463314}
   ToxicityWarning: {fileID: 1768891973}
+  SubmarineCollision: {fileID: 1803463314}
+  SubmarineSpeed: 0
 --- !u!54 &2062519437
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -33721,7 +33723,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2062519431}
   serializedVersion: 2
-  m_Mass: 10
+  m_Mass: 5
   m_Drag: 1
   m_AngularDrag: 1
   m_UseGravity: 0

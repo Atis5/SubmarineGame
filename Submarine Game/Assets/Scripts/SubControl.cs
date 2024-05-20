@@ -234,14 +234,14 @@ public class SubControl : MonoBehaviour
     // Bumping and tilting when hitting obstacles.
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag != "Pickable")
+        if ((collision.gameObject.tag != "Pickable") && (SubmarineSpeed > 15))
         {
             CurrentBumpForce = BumpForce * -SubmarineSpeed;
             CurrentHealth += CurrentBumpForce/100;
             HealthNumberText.text = Mathf.Round(CurrentHealth).ToString();
             SubmarineSpeed = 0;
             rb.AddForce(transform.forward * CurrentBumpForce);
-            rb.AddTorque(transform.forward * -CurrentBumpForce * 2);
+            rb.AddTorque(transform.forward * -CurrentBumpForce);
             rb.AddTorque(transform.up * -CurrentBumpForce);
             CurrentBumpForce = 0;
         }
