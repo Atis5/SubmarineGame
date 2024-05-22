@@ -44,16 +44,30 @@ public class SubControl : MonoBehaviour
 
     void Start()
     {
+        // Lock Player's cursor.
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
+        // References:
         SubControlScript = this; // Allows to reference this script in other scripts.
         rb = GetComponent<Rigidbody>(); // References Rigidbody component.
+
+        // Set default values:
+        CurrentHealth = MaxHealth;
         SubmarineDepth = Player.transform.position.y;
+
+        // Update HUD at the start:
         SubmarineDepthText.text = SubmarineDepth.ToString() + "m";
         SubmarineSpeedText.text = SubmarineSpeed.ToString();
         ToxicityNumberText.text = ToxicityNumber.ToString() + " TU";
-        CurrentHealth = MaxHealth;
         HealthNumberText.text = CurrentHealth.ToString();
-    }   
+    }
 
+    private void Update()
+    {
+        rb.AddTorque(transform.up * Input.GetAxis("Mouse X") * TurnSpeed/3);
+        rb.AddTorque(transform.right * -Input.GetAxis("Mouse Y") * TurnSpeed/3);
+    }
 
     void FixedUpdate()
     {
@@ -109,6 +123,7 @@ public class SubControl : MonoBehaviour
         }
 
         // Stops submarine if speed is less than minimum. This is to prevent Submarine from moving very slowly and annoying players.
+        // No longer needed due to changes in how the Submarine moves.
         /*else if (Mathf.Abs(SubmarineSpeed) <= MinSpeed)
         {
             SubmarineSpeed = 0;
@@ -116,7 +131,7 @@ public class SubControl : MonoBehaviour
         */
         
         SubmarineSpeed = Mathf.Clamp(SubmarineSpeed, -MaxBackwardSpeed, MaxForwardSpeed);
-        SubmarineSpeedText.text = Mathf.Round(SubmarineSpeed / 10).ToString() + " kn";
+        SubmarineSpeedText.text = Mathf.Round(SubmarineSpeed / 10).ToString() + " knots";
         rb.AddForce(transform.forward * SubmarineSpeed);
     }
 
@@ -124,11 +139,11 @@ public class SubControl : MonoBehaviour
 
     private void Turning()
     {
-        if ((Input.GetKey(Controls.ControlsScript.TurnUp)) && transform.rotation.x > -90)
+        if (Input.GetKey(Controls.ControlsScript.TurnUp))
         {
             rb.AddTorque(transform.right * -TurnSpeed);
         }
-        else if ((Input.GetKey(Controls.ControlsScript.TurnDown)) && transform.rotation.x < 90)
+        else if (Input.GetKey(Controls.ControlsScript.TurnDown))
         {
             rb.AddTorque(transform.right * TurnSpeed);
         }
@@ -143,19 +158,21 @@ public class SubControl : MonoBehaviour
 
         }
 
-            // Submarine stabilization
-            rb.MoveRotation(Quaternion.Slerp(rb.rotation, Quaternion.Euler(new Vector3(rb.rotation.eulerAngles.x, rb.rotation.eulerAngles.y, 0)), StabilizationSmoothing));
+
+
+        // Submarine stabilization
+        rb.MoveRotation(Quaternion.Slerp(rb.rotation, Quaternion.Euler(new Vector3(rb.rotation.eulerAngles.x, rb.rotation.eulerAngles.y, 0)), StabilizationSmoothing));
     }
 
 
 
     private void RisingAndSinking()
     {
-        if (Input.GetKey(Controls.ControlsScript.Rise))
+        if ((Input.GetKey(Controls.ControlsScript.Rise)) || Input.GetMouseButton(0))
         {
             rb.AddForce(transform.up * RiseSpeed);
         }
-        else if (Input.GetKey(Controls.ControlsScript.Sink))
+        else if ((Input.GetKey(Controls.ControlsScript.Sink)) || Input.GetMouseButton(1))
         {
             rb.AddForce(transform.up * -RiseSpeed);
         }
@@ -241,7 +258,7 @@ public class SubControl : MonoBehaviour
             SubmarineSpeed = 0;
             rb.AddForce(transform.forward * CurrentBumpForce);
             rb.AddTorque(transform.forward * -CurrentBumpForce);
-            rb.AddTorque(transform.up * -CurrentBumpForce);
+            rb.AddTorque(transform.up * -CurrentBumpForce /2);
             CurrentBumpForce = 0;
         }
     }
