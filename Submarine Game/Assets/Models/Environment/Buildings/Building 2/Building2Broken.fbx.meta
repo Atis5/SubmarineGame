@@ -1,9 +1,34 @@
 fileFormatVersion: 2
-guid: de84330f69e3d6842be164182e0be233
+guid: 9c9b3691d4446d044b891eb6d93aa132
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Building
+    second: {fileID: 2100000, guid: c7588f78a57a8a14fbb062df0e4d7d07, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Door
+    second: {fileID: 2100000, guid: 51ac5f6e006e9154db0585f26955c810, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Roof
+    second: {fileID: 2100000, guid: aa6dccaaf2ee6dd47b8e99682ee357a6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Stairs
+    second: {fileID: 2100000, guid: 25b74d33c2579a342b92263a7a852848, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Window
+    second: {fileID: 2100000, guid: d3d2c581d80128e438bc243cac6020e3, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

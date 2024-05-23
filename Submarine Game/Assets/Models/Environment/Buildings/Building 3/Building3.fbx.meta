@@ -1,9 +1,44 @@
 fileFormatVersion: 2
-guid: af048bb172ff12643aef23c28116bc86
+guid: edcb7ad15cf90a3469f1ceab580afca3
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Building_Red
+    second: {fileID: 2100000, guid: 0592f86cdd908ec4db27e0d6ca34a20a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: DOOR
+    second: {fileID: 2100000, guid: 021d152cfd301dd49b814ab27d6367a0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ROOOOF
+    second: {fileID: 2100000, guid: 54c75ea0c38d8cb4c817e3f5c8e08547, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Windauws
+    second: {fileID: 2100000, guid: 7e16ba2103224244a9703281b6976f68, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: bblue
+    second: {fileID: 2100000, guid: 0fe057497064e4147a90c96db92758e7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: bgreen
+    second: {fileID: 2100000, guid: 5851050e8ce86674d8711adda9f46b18, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: byellow
+    second: {fileID: 2100000, guid: 5ffe785fb29a7a64b9ea7da1c1ea7684, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
