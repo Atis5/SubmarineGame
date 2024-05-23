@@ -3,7 +3,22 @@ guid: 97d834cfc727a1a47a36258045f262d7
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.012
+    second: {fileID: 2100000, guid: 663ee5426f0d79b4d9e839808d4937e4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Metalik
+    second: {fileID: 2100000, guid: 5b53f5d3fc6c4de49a24e797937b4a40, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Metalik.001
+    second: {fileID: 2100000, guid: 5b53f5d3fc6c4de49a24e797937b4a40, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
