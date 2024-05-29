@@ -240,17 +240,19 @@ public class SubControl : MonoBehaviour
             if (CurrentHealth < 0)
             {
                 CurrentHealth = 0;
+                HealthNumberText.text = Mathf.Round(CurrentHealth).ToString();
             }
             if (CurrentHealth > MaxHealth)
             {
                 CurrentHealth = MaxHealth;
+                HealthNumberText.text = Mathf.Round(CurrentHealth).ToString();
             }
         }
 
     // Bumping and tilting when hitting obstacles.
     private void OnCollisionEnter(Collision collision)
     {
-        if ((collision.gameObject.tag != "Pickable") && (SubmarineSpeed > 15))
+        if ((collision.gameObject.tag != "Pickable") && (SubmarineSpeed > 50))
         {
             CurrentBumpForce = BumpForce * -SubmarineSpeed;
             CurrentHealth += CurrentBumpForce/100;
