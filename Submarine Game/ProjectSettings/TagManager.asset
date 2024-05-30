@@ -8,6 +8,7 @@ TagManager:
   - 3P Submarine
   - Pickable
   - Toxic
+  - Trash Collectible
   layers:
   - Default
   - TransparentFX

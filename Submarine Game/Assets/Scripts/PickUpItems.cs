@@ -18,9 +18,9 @@ public class PickUpItems : MonoBehaviour
     public Camera MainCamera; // 1st Person Camera reference
 
     [Header ("Necessary Variables")]
-    private bool AllowDropping = true; // If player holds anything, they can drop it. 
     public static PickUpItems PickUpScript; // Allows us to reference this script in other scripts.
     private bool IsInteracting = false; // Needed for MarkPickabkleObjects method
+    private bool IsHolding = false;
     private GameObject LastObject; // Needed for MarkPickabkleObjects method
     private Color LastObjectColor; // Needed for MarkPickabkleObjects method
 
@@ -35,27 +35,21 @@ public class PickUpItems : MonoBehaviour
     {
         MarkPickableObjects();
 
-        if (Input.GetKeyDown(Controls.ControlsScript.PickUp))
+        if ((Input.GetKey(Controls.ControlsScript.PickUp)) && (IsHolding == false))
         {
             RaycastHit hit;
-            if (HeldObject == null)
-            {
                 if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, PickUpRange))
                 {
                     if (hit.transform.gameObject.tag == "Pickable")
                     {
                         PickUpObject(hit.transform.gameObject);
                     }
-                }
             }
-            else
-            {
-                if (AllowDropping == true)
-                {
-                    StopClipping();
-                    DropObject();
-                }
-            }
+        }
+        if ((IsHolding == true) && (Input.GetKeyDown(Controls.ControlsScript.PickUp)))
+        {
+            StopClipping();
+            DropObject();
         }
     }
 
@@ -64,12 +58,21 @@ public class PickUpItems : MonoBehaviour
     {
         if (PickableObject.GetComponent<Rigidbody>())
         {
-            HeldObject = PickableObject;
-            HeldObjectRigidbody = PickableObject.GetComponent<Rigidbody>();
-            HeldObjectRigidbody.isKinematic = true;
-            HeldObject.transform.position = HoldPosition.transform.position;
-            HeldObjectRigidbody.transform.parent = HoldPosition.transform;
-            Physics.IgnoreCollision(HeldObject.GetComponent<Collider>(), SubmarineCollision.GetComponent<Collider>(), true);
+            //Vector3.MoveTowards(PickableObject.transform.position, HoldPosition.transform.position, 10f);
+            //if (PickableObject.transform.position == HoldPosition.transform.position)
+
+                HeldObject = PickableObject;
+                HeldObjectRigidbody = PickableObject.GetComponent<Rigidbody>();
+                HeldObject.transform.position = Vector3.MoveTowards(HeldObject.transform.position, HoldPosition.transform.position, 0.1f);
+                if (HeldObject.transform.position == HoldPosition.transform.position)
+                {
+                    HeldObject.transform.position = HoldPosition.transform.position;
+                    HeldObjectRigidbody.isKinematic = true;
+                    HeldObjectRigidbody.transform.parent = HoldPosition.transform;
+                    Physics.IgnoreCollision(HeldObject.GetComponent<Collider>(), SubmarineCollision.GetComponent<Collider>(), true);
+                    IsHolding = true;
+                }
+
         }
     }
 
@@ -80,6 +83,7 @@ public class PickUpItems : MonoBehaviour
         HeldObjectRigidbody.isKinematic = false;
         HeldObject.transform.parent = null;
         HeldObject = null;
+        IsHolding = false;
     }
 
 

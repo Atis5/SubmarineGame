@@ -25,6 +25,7 @@ public class SubControl : MonoBehaviour
     [SerializeField] private TextMeshProUGUI SubmarineDepthText;
     [SerializeField] private TextMeshProUGUI ToxicityNumberText;
     [SerializeField] private TextMeshProUGUI HealthNumberText;
+    [SerializeField] private TextMeshProUGUI TrashCounter;
 
     [Header("Necessary Variables")]
     public GameObject Player;
@@ -157,8 +158,6 @@ public class SubControl : MonoBehaviour
             rb.AddTorque(transform.up * -TurnSpeed);
 
         }
-
-
 
         // Submarine stabilization
         rb.MoveRotation(Quaternion.Slerp(rb.rotation, Quaternion.Euler(new Vector3(rb.rotation.eulerAngles.x, rb.rotation.eulerAngles.y, 0)), StabilizationSmoothing));
