@@ -6,7 +6,7 @@ using DG.Tweening;
 public class EnemyMovement : MonoBehaviour
 {
     public bool dies;
-    public GameObject targetposition;
+    public Transform Playerposition;
     public float direction;
     public bool target;
     public float enemydelay;
@@ -16,89 +16,45 @@ public class EnemyMovement : MonoBehaviour
     public Vector3 MaxPosition;
     public Vector3 RandomPosition;
     public Rigidbody rb;
+    public float MaxSpeed;
     void Start()
     {
-        targetposition = GameObject.Find("Player");
+      GameObject playerPos = GameObject.Find("TargetSpot");
+        Playerposition = playerPos.transform;
         target = true;
     }
 
-  
+
     void Update()
     {
         DestroyEnemy();
-        move();
-       // Charging();
+        Charging();
     }
-    private void move()
-    {
-        
-
-        float StoppingDistance = Vector3.Distance(transform.position, targetposition.transform.position);
-        
-        
-            if (target)
-             
-            {
-          
-            // GameObject Player = GameObject.Find("Player"); 
-            Vector3 targetdirection = targetposition.transform.position - transform.position;
-                Quaternion targetrotation = Quaternion.LookRotation(targetdirection);
-                transform.rotation = Quaternion.Lerp(transform.rotation, targetrotation, Time.deltaTime);
-
-                targetpos = targetposition.transform.position;
-                transform.DOMove(targetpos, direction).SetSpeedBased(true);
-                
-                }
-            else
-            {
-            if (StoppingDistance < 0.5f)
-            {
-                RandomPosition = GetRandomPosition();
-
-            }
-            
-
-            targetpos = RandomPosition;
-            Vector3 targetdirection = targetpos - transform.position;
-            Quaternion targetrotation = Quaternion.LookRotation(targetdirection);
-            transform.rotation = Quaternion.Lerp(transform.rotation, targetrotation, Time.deltaTime);
-            transform.DOMove(targetpos, direction).SetSpeedBased(true);
-            enemydelay -= Time.deltaTime;
-            if (enemydelay <= 0)
-            {
-                target = true;
-                enemydelay = 7;
-            }
-            }
-        
-      
-
-            }
     public void Charging()
     {
-        float StoppingDistance = Vector3.Distance(transform.position, targetposition.transform.position);
         if (target)
         {
-
-            Vector3 targetdirection =targetposition.transform.position - transform.position;
-            Quaternion targetrotation = Quaternion.LookRotation(targetdirection);
-            transform.rotation = Quaternion.Lerp(transform.rotation, targetrotation, Time.deltaTime);
-            targetpos = targetposition.transform.position;
-            rb.AddForce(targetdirection * direction, ForceMode.Impulse);
+            targetpos = Playerposition.position;
+            Vector3 pos = (targetpos - transform.position).normalized;
+            rb.AddForce(pos * direction);
+            if (rb.velocity.magnitude > MaxSpeed)
+            {
+                rb.velocity = rb.velocity.normalized * MaxSpeed;
+            }
         }
         else
         {
-            if (StoppingDistance < 0.5f)
-            {
-                RandomPosition = GetRandomPosition();
-
-            }
-
             targetpos = RandomPosition;
-            transform.DOMove(targetpos, direction).SetSpeedBased(true);
+            Vector3 randomPos = (targetpos - transform.position).normalized;
+            rb.AddForce(randomPos * direction);
+            if (rb.velocity.magnitude > MaxSpeed/2f)
+            {
+                rb.velocity = rb.velocity.normalized * (MaxSpeed/2f);
+            }
             enemydelay -= Time.deltaTime;
             if (enemydelay <= 0)
             {
+                rb.velocity = Vector3.zero;
                 target = true;
                 enemydelay = 7;
             }
@@ -108,22 +64,18 @@ public class EnemyMovement : MonoBehaviour
     {
         if (dies)
         {
-            DefensesSystemPlayer.defensesSystemPlayer.WarningScreen.enabled = false;
+            // DefensesSystemPlayer.defensesSystemPlayer.WarningScreen.enabled = false;
             Destroy(this.gameObject);
         }
-      
+
     }
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            //if (target)
-            //{
-               // SubControl.SubControlScript.CurrentHealth -= 20;
-           // }
-           
+            StartCoroutine(RandomPos());
             target = false;
-             RandomPosition = GetRandomPosition();
+            Debug.Log("abc");
         }
     }
     Vector3 GetRandomPosition()
@@ -132,5 +84,12 @@ public class EnemyMovement : MonoBehaviour
         float randomY = Random.Range(MinPosition.y, MaxPosition.y);
         float randomZ = Random.Range(MinPosition.z, MaxPosition.z);
         return new Vector3(randomX, randomY, randomZ);
+    }
+    IEnumerator RandomPos()
+    {
+        yield return new WaitForSeconds(0f);
+        target = false;
+        RandomPosition = GetRandomPosition();
+        Debug.Log("Random");
     }
 }

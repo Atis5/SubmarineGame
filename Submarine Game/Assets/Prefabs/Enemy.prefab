@@ -211,15 +211,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72f743be01a044439b36509136e72f8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetposition: {fileID: 0}
+  dies: 0
+  Playerposition: {fileID: 0}
   direction: 3
   target: 0
-  enemydelay: 0
+  enemydelay: 7
   targetpos: {x: 0, y: 0, z: 0}
   MinPosition: {x: 0, y: 0, z: 0}
   MaxPosition: {x: 75, y: 25, z: 75}
   RandomPosition: {x: 0, y: 0, z: 0}
   rb: {fileID: 7682972435397815374}
+  MaxSpeed: 15
 --- !u!65 &7682972435397815375
 BoxCollider:
   m_ObjectHideFlags: 0

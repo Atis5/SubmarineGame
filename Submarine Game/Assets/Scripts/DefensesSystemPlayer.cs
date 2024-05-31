@@ -25,7 +25,7 @@ public class DefensesSystemPlayer : MonoBehaviour
         {
                 EnemyMovement obj = target.GetComponent<EnemyMovement>();
             float AlertDistance = Vector3.Distance(transform.position, target.transform.position);
-            Debug.Log(AlertDistance);
+           
             if (AlertDistance<15)
             {
                 WarningScreen.enabled = true;
@@ -35,8 +35,12 @@ public class DefensesSystemPlayer : MonoBehaviour
                     obj.dies = true;
                     EnemySpawner.enemySpawner.IsSpawning = true;
                 }
-
+                if (AlertDistance < 1.5f)
+                {
+                    obj.target = false;
+                }
             }
+            
             else
             {
                 WarningScreen.enabled = false;
