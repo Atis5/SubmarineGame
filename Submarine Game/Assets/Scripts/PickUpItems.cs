@@ -6,6 +6,7 @@ public class PickUpItems : MonoBehaviour
 {
     [Header ("Properties")]
     public float PickUpRange; // How far you need to be from an item to pick it up.
+    public float GrabArmStrength; // How quickly objects will be pulled towards the player.
     public Color MarkColor; // What color will the items turn when they are pickable.
 
     [Header ("References")]
@@ -16,6 +17,7 @@ public class PickUpItems : MonoBehaviour
     public GameObject TrashBin; // Not used right now.
     public Transform TrashCollector; // Not used right now.
     public Camera MainCamera; // 1st Person Camera reference
+    
 
     [Header ("Necessary Variables")]
     public static PickUpItems PickUpScript; // Allows us to reference this script in other scripts.
@@ -26,52 +28,60 @@ public class PickUpItems : MonoBehaviour
 
 
 
+
     private void Start()
     {
         PickUpScript = this;
-    }
+}
+
 
     void Update()
     {
         MarkPickableObjects();
+        ObjectInteraction();
+    }
 
-        if ((Input.GetKey(Controls.ControlsScript.PickUp)) && (IsHolding == false))
-        {
-            RaycastHit hit;
-                if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, PickUpRange))
-                {
-                    if (hit.transform.gameObject.tag == "Pickable")
-                    {
-                        PickUpObject(hit.transform.gameObject);
-                    }
-            }
-        }
+
+    /// <summary>
+    /// Checks if player is looking at the object and calls other methods to pick or drop it.
+    /// </summary>
+    void ObjectInteraction()
+    {
         if ((IsHolding == true) && (Input.GetKeyDown(Controls.ControlsScript.PickUp)))
         {
             StopClipping();
             DropObject();
         }
+        else if (Input.GetKey(Controls.ControlsScript.PickUp) && (IsHolding == false))
+        {
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, PickUpRange))
+            {
+                if (hit.transform.gameObject.tag == "Pickable")
+                {
+                    PickUpObject(hit.transform.gameObject);
+                }
+            }
+        }
     }
 
-    
+
     void PickUpObject(GameObject PickableObject)
     {
         if (PickableObject.GetComponent<Rigidbody>())
         {
-            //Vector3.MoveTowards(PickableObject.transform.position, HoldPosition.transform.position, 10f);
-            //if (PickableObject.transform.position == HoldPosition.transform.position)
 
-                HeldObject = PickableObject;
-                HeldObjectRigidbody = PickableObject.GetComponent<Rigidbody>();
-                HeldObject.transform.position = Vector3.MoveTowards(HeldObject.transform.position, HoldPosition.transform.position, 0.1f);
-                if (HeldObject.transform.position == HoldPosition.transform.position)
-                {
-                    HeldObject.transform.position = HoldPosition.transform.position;
-                    HeldObjectRigidbody.isKinematic = true;
-                    HeldObjectRigidbody.transform.parent = HoldPosition.transform;
-                    Physics.IgnoreCollision(HeldObject.GetComponent<Collider>(), SubmarineCollision.GetComponent<Collider>(), true);
-                    IsHolding = true;
-                }
+            HeldObject = PickableObject;
+            HeldObjectRigidbody = PickableObject.GetComponent<Rigidbody>();
+            HeldObject.transform.position = Vector3.MoveTowards(HeldObject.transform.position, HoldPosition.transform.position, GrabArmStrength*Time.fixedDeltaTime);
+            if (HeldObject.transform.position == HoldPosition.transform.position)
+            {
+                HeldObject.transform.position = HoldPosition.transform.position;
+                HeldObjectRigidbody.isKinematic = true;
+                HeldObjectRigidbody.transform.parent = HoldPosition.transform;
+                Physics.IgnoreCollision(HeldObject.GetComponent<Collider>(), SubmarineCollision.GetComponent<Collider>(), true);
+                IsHolding = true;
+            }
 
         }
     }
@@ -113,6 +123,7 @@ public class PickUpItems : MonoBehaviour
         HeldObjectRigidbody.useGravity = true;
         HeldObject = null;
     }
+
 
     /// <summary>
     /// Creates a raycast from camera position and if the ray hits the object, it will change its color.

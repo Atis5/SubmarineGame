@@ -14,7 +14,7 @@ public class SubControl : MonoBehaviour
     [SerializeField] private float MaxForwardSpeed; // Submarine will not go faster than that.
     [SerializeField] private float MaxBackwardSpeed; // Submarine will not go faster than that.
     [SerializeField] private float MinSpeed; // How slow can Submarine be before stopping.
-    [SerializeField] private float TurnSpeed; // How fast the submarine goes left and right.
+    [SerializeField] public float TurnSpeed; // How fast the submarine goes left and right.
     [SerializeField] private float RiseSpeed;   // How fast the submarine goes up and down.
     [SerializeField] private float StabilizationSmoothing; // How fast the submarine will stabilize after being rotated.
     [SerializeField] private float BumpForce; // How far the submarine will be pushed away after hitting something.
@@ -32,7 +32,7 @@ public class SubControl : MonoBehaviour
     public GameObject ToxicityWarning;
     public Collider SubmarineCollision; // Needed to make colliders work.
     private Rigidbody rb; // Reference to Rigidbody.
-    public static SubControl SubControlScript; // Variable where the script reference is stored.
+    public static SubControl SubControlScript; // Variable where this script reference is stored.
     private bool ToxicityWarningIsActive = false;  // Checks if the method is running.
     private bool IsInToxicArea = false;
     public  float SubmarineSpeed = 0; // Influenced by Acceleration.
@@ -66,6 +66,7 @@ public class SubControl : MonoBehaviour
 
     private void Update()
     {
+        // Mouse movement. Needs to be in Update method, which is why it's not in "Turning()".
         rb.AddTorque(transform.up * Input.GetAxis("Mouse X") * TurnSpeed/3);
         rb.AddTorque(transform.right * -Input.GetAxis("Mouse Y") * TurnSpeed/3);
     }

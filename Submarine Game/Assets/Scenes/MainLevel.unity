@@ -32140,6 +32140,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PickUpRange: 50
+  GrabArmStrength: 20
   MarkColor: {r: 1, g: 0, b: 0, a: 1}
   SubmarineCollision: {fileID: 1591090806}
   HoldPosition: {fileID: 291131983}
