@@ -32140,13 +32140,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PickUpRange: 50
-  GrabArmStrength: 20
+  PickUpCooldown: 50
+  GrabArmStrength: 0.1
   MarkColor: {r: 1, g: 0, b: 0, a: 1}
   SubmarineCollision: {fileID: 1591090806}
   HoldPosition: {fileID: 291131983}
   TrashBin: {fileID: 55711492}
   TrashCollector: {fileID: 472711151}
   MainCamera: {fileID: 694617471}
+  CurrentPickUpCooldown: 0
 --- !u!81 &694617470
 AudioListener:
   m_ObjectHideFlags: 0

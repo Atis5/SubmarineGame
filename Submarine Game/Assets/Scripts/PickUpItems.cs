@@ -6,6 +6,7 @@ public class PickUpItems : MonoBehaviour
 {
     [Header ("Properties")]
     public float PickUpRange; // How far you need to be from an item to pick it up.
+    public float PickUpCooldown;
     public float GrabArmStrength; // How quickly objects will be pulled towards the player.
     public Color MarkColor; // What color will the items turn when they are pickable.
 
@@ -25,6 +26,8 @@ public class PickUpItems : MonoBehaviour
     private bool IsHolding = false;
     private GameObject LastObject; // Needed for MarkPickabkleObjects method
     private Color LastObjectColor; // Needed for MarkPickabkleObjects method
+    private float CurrentGrabArmStrength;
+    public float CurrentPickUpCooldown;
 
 
 
@@ -32,13 +35,23 @@ public class PickUpItems : MonoBehaviour
     private void Start()
     {
         PickUpScript = this;
-}
+    }
 
 
     void Update()
     {
         MarkPickableObjects();
         ObjectInteraction();
+
+ 
+    }
+
+    void FixedUpdate()
+    {
+        if (CurrentPickUpCooldown <= PickUpCooldown)
+        {
+            CurrentPickUpCooldown++;
+        }
     }
 
 
@@ -52,7 +65,7 @@ public class PickUpItems : MonoBehaviour
             StopClipping();
             DropObject();
         }
-        else if (Input.GetKey(Controls.ControlsScript.PickUp) && (IsHolding == false))
+        else if (Input.GetKey(Controls.ControlsScript.PickUp) && (IsHolding == false) && (CurrentPickUpCooldown >= PickUpCooldown))
         {
             RaycastHit hit;
             if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, PickUpRange))
@@ -70,10 +83,10 @@ public class PickUpItems : MonoBehaviour
     {
         if (PickableObject.GetComponent<Rigidbody>())
         {
-
             HeldObject = PickableObject;
             HeldObjectRigidbody = PickableObject.GetComponent<Rigidbody>();
-            HeldObject.transform.position = Vector3.MoveTowards(HeldObject.transform.position, HoldPosition.transform.position, GrabArmStrength*Time.fixedDeltaTime);
+            CurrentGrabArmStrength += GrabArmStrength * Time.deltaTime;
+            HeldObject.transform.position = Vector3.MoveTowards(HeldObject.transform.position, HoldPosition.transform.position, CurrentGrabArmStrength);
             if (HeldObject.transform.position == HoldPosition.transform.position)
             {
                 HeldObject.transform.position = HoldPosition.transform.position;
@@ -81,6 +94,7 @@ public class PickUpItems : MonoBehaviour
                 HeldObjectRigidbody.transform.parent = HoldPosition.transform;
                 Physics.IgnoreCollision(HeldObject.GetComponent<Collider>(), SubmarineCollision.GetComponent<Collider>(), true);
                 IsHolding = true;
+                CurrentGrabArmStrength = GrabArmStrength;
             }
 
         }
@@ -94,6 +108,7 @@ public class PickUpItems : MonoBehaviour
         HeldObject.transform.parent = null;
         HeldObject = null;
         IsHolding = false;
+        CurrentPickUpCooldown = 0;
     }
 
 
@@ -158,5 +173,7 @@ public class PickUpItems : MonoBehaviour
             }
         }
     }
+
+
 
 }
