@@ -3,26 +3,21 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - 1P Submarine
-  - 3P Submarine
-  - Pickable
-  - Toxic
-  - Trash Collectible
+  tags: []
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Player
+  - 
   - Water
   - UI
-  - GroundObjects
-  - PickableObjects
-  - GlassObjects
-  - Volume
-  - 1P Submarine
-  - 3P Submarine
-  - Radar
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
   - 
   - 
   - 

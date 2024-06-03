@@ -14,7 +14,7 @@ public class SubControl : MonoBehaviour
     [SerializeField] private float MaxForwardSpeed; // Submarine will not go faster than that.
     [SerializeField] private float MaxBackwardSpeed; // Submarine will not go faster than that.
     [SerializeField] private float MinSpeed; // How slow can Submarine be before stopping.
-    [SerializeField] public float TurnSpeed; // How fast the submarine goes left and right.
+    [SerializeField] private float TurnSpeed; // How fast the submarine goes left and right.
     [SerializeField] private float RiseSpeed;   // How fast the submarine goes up and down.
     [SerializeField] private float StabilizationSmoothing; // How fast the submarine will stabilize after being rotated.
     [SerializeField] private float BumpForce; // How far the submarine will be pushed away after hitting something.
@@ -25,14 +25,13 @@ public class SubControl : MonoBehaviour
     [SerializeField] private TextMeshProUGUI SubmarineDepthText;
     [SerializeField] private TextMeshProUGUI ToxicityNumberText;
     [SerializeField] private TextMeshProUGUI HealthNumberText;
-    [SerializeField] private TextMeshProUGUI TrashCounter;
 
     [Header("Necessary Variables")]
     public GameObject Player;
     public GameObject ToxicityWarning;
     public Collider SubmarineCollision; // Needed to make colliders work.
     private Rigidbody rb; // Reference to Rigidbody.
-    public static SubControl SubControlScript; // Variable where this script reference is stored.
+    public static SubControl SubControlScript; // Variable where the script reference is stored.
     private bool ToxicityWarningIsActive = false;  // Checks if the method is running.
     private bool IsInToxicArea = false;
     public  float SubmarineSpeed = 0; // Influenced by Acceleration.
@@ -66,7 +65,6 @@ public class SubControl : MonoBehaviour
 
     private void Update()
     {
-        // Mouse movement. Needs to be in Update method, which is why it's not in "Turning()".
         rb.AddTorque(transform.up * Input.GetAxis("Mouse X") * TurnSpeed/3);
         rb.AddTorque(transform.right * -Input.GetAxis("Mouse Y") * TurnSpeed/3);
     }
@@ -160,6 +158,8 @@ public class SubControl : MonoBehaviour
 
         }
 
+
+
         // Submarine stabilization
         rb.MoveRotation(Quaternion.Slerp(rb.rotation, Quaternion.Euler(new Vector3(rb.rotation.eulerAngles.x, rb.rotation.eulerAngles.y, 0)), StabilizationSmoothing));
     }
@@ -240,19 +240,17 @@ public class SubControl : MonoBehaviour
             if (CurrentHealth < 0)
             {
                 CurrentHealth = 0;
-                HealthNumberText.text = Mathf.Round(CurrentHealth).ToString();
             }
             if (CurrentHealth > MaxHealth)
             {
                 CurrentHealth = MaxHealth;
-                HealthNumberText.text = Mathf.Round(CurrentHealth).ToString();
             }
         }
 
     // Bumping and tilting when hitting obstacles.
     private void OnCollisionEnter(Collision collision)
     {
-        if ((collision.gameObject.tag != "Pickable") && (SubmarineSpeed > 50))
+        if ((collision.gameObject.tag != "Pickable"))
         {
             CurrentBumpForce = BumpForce * -SubmarineSpeed;
             CurrentHealth += CurrentBumpForce/100;
@@ -271,6 +269,17 @@ public class SubControl : MonoBehaviour
         if (other.gameObject.tag == "Toxic")
         {
             IsInToxicArea = true;
+        }
+        if (other.gameObject.tag == "Enemy")
+        {
+            CurrentBumpForce = BumpForce * -SubmarineSpeed;
+            CurrentHealth += CurrentBumpForce / 100;
+            HealthNumberText.text = Mathf.Round(CurrentHealth).ToString();
+            SubmarineSpeed = 0;
+            rb.AddForce(transform.forward * CurrentBumpForce);
+            rb.AddTorque(transform.forward * -CurrentBumpForce);
+            rb.AddTorque(transform.up * -CurrentBumpForce / 2);
+            CurrentBumpForce = 0;
         }
     }
 
