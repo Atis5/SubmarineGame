@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Radar : MonoBehaviour
+public class RadarAnimation : MonoBehaviour
 {
 
     [SerializeField] private Transform RadarCenter;

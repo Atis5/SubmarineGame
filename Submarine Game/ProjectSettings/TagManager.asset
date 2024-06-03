@@ -3,16 +3,19 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Toxic
+  - Trash Collectible
+  - Pickable
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Radar
   - Water
   - UI
-  - 
-  - 
+  - 1st Person
+  - 3rd Person
   - 
   - 
   - 
