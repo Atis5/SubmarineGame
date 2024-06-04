@@ -8,6 +8,7 @@ public class RadarTracking : MonoBehaviour
     [SerializeField] private GameObject RadarTrashPrefab;
     [SerializeField] private Transform RadarTransform;
     [SerializeField] private GameObject[] TrashObjects;
+    [SerializeField] private GameObject CameraRadar;
     List<GameObject> RadarObjects;
     List<GameObject> BorderObjects;
 
@@ -19,7 +20,8 @@ public class RadarTracking : MonoBehaviour
     }
     private void Update()
     {
-        /*for (int i = 0; i < RadarObjects.Count; i++)
+
+        for (int i = 0; i < RadarObjects.Count; i++)
         {
             if (Vector3.Distance(RadarObjects[i].transform.position, transform.position) > BorderDistance)
             {
@@ -27,7 +29,7 @@ public class RadarTracking : MonoBehaviour
                 RadarTransform.LookAt(RadarObjects[i].transform);
                 BorderObjects[i].transform.position = transform.position + BorderDistance * RadarTransform.forward;
                 BorderObjects[i].layer = LayerMask.NameToLayer("Radar");
-                RadarObjects[i].layer = LayerMask.NameToLayer("Invisible");
+                RadarObjects[i].layer = LayerMask.NameToLayer("Invisible"); //delete this code, come back with a degree in phsycology so you know how to mentally survive this turmoil of a project
             }
             else
             {
@@ -35,7 +37,7 @@ public class RadarTracking : MonoBehaviour
                 BorderObjects[i].layer = LayerMask.NameToLayer("Invisible");
                 RadarObjects[i].layer = LayerMask.NameToLayer("Radar");
             }
-        }*/
+        }
     }
 
     void CreateRadarObjects()
