@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class VacuumWaste : MonoBehaviour
 {
-    private bool IsInToxicArea = false;
     void Start()
     {
         
@@ -15,20 +14,33 @@ public class VacuumWaste : MonoBehaviour
         AreaInteraction();
     }
 
+    //does not work atm
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "toxic")
         {
-            IsInToxicArea = true;
+            SubControl.SubControlScript.IsInToxicArea = true;
+            Debug.Log("INSIDE TOXIC STUFF");
         }
     }
 
     //Should allow player to interact when inside of the toxic area
     void AreaInteraction()
     {
-        if ((IsInToxicArea = true) && (Input.GetKeyDown(Controls.ControlsScript.Vacuum)))
+        if ((SubControl.SubControlScript.IsInToxicArea == true) && (Input.GetKeyDown(Controls.ControlsScript.Vacuum)))
         {
-            
+            Debug.Log("Vacuum");
+        }
+        if ((SubControl.SubControlScript.IsInToxicArea == false) && (Input.GetKeyDown(Controls.ControlsScript.Vacuum)))
+        {
+            Debug.Log("No Vacuming allowed");
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "Toxic")
+        {
+            SubControl.SubControlScript.IsInToxicArea = false;
         }
     }
 }

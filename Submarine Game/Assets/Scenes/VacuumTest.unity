@@ -199,7 +199,7 @@ MonoBehaviour:
   ChangeCamera: 9
   PickUp: 101
   Defense: 113
-  Vacuum: 101
+  Vacuum: 304
 --- !u!114 &110732096
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -243,6 +243,7 @@ MonoBehaviour:
   Player: {fileID: 110732092}
   ToxicityWarning: {fileID: 1353694862}
   SubmarineCollision: {fileID: 569514201}
+  IsInToxicArea: 0
   SubmarineSpeed: 0
 --- !u!54 &110732098
 Rigidbody:
@@ -4802,7 +4803,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1061701699}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!20 &1061701704
 Camera:
   m_ObjectHideFlags: 0

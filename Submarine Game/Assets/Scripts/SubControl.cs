@@ -33,7 +33,7 @@ public class SubControl : MonoBehaviour
     private Rigidbody rb; // Reference to Rigidbody.
     public static SubControl SubControlScript; // Variable where the script reference is stored.
     private bool ToxicityWarningIsActive = false;  // Checks if the method is running.
-    private bool IsInToxicArea = false;
+    public bool IsInToxicArea = false;
     public  float SubmarineSpeed = 0; // Influenced by Acceleration.
     private float SubmarineDepth;
     private float ToxicityNumber = 10;
