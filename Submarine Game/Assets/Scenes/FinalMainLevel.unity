@@ -1208,6 +1208,7 @@ MonoBehaviour:
   ChangeCamera: 9
   PickUp: 101
   Defense: 113
+  Vacuum: 0
 --- !u!114 &354529562
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1235,9 +1236,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad5a0e930f92b454190921d911f72bec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Acceleration: 1
-  MaxForwardSpeed: 140
-  MaxBackwardSpeed: 60
+  Acceleration: 3
+  MaxForwardSpeed: 350
+  MaxBackwardSpeed: 180
   MinSpeed: 15
   TurnSpeed: 50
   RiseSpeed: 100
@@ -1251,6 +1252,7 @@ MonoBehaviour:
   Player: {fileID: 354529558}
   ToxicityWarning: {fileID: 423380285}
   SubmarineCollision: {fileID: 553803959}
+  IsInToxicArea: 0
   SubmarineSpeed: 0
 --- !u!54 &354529564
 Rigidbody:
