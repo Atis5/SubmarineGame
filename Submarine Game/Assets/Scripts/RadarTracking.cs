@@ -5,10 +5,11 @@ using UnityEngine;
 public class RadarTracking : MonoBehaviour
 {
     [SerializeField] private float BorderDistance;
+    [SerializeField] private float RadarDistance;
     [SerializeField] private GameObject RadarTrashPrefab;
     [SerializeField] private Transform RadarTransform;
     [SerializeField] private GameObject[] TrashObjects;
-    [SerializeField] private GameObject CameraRadar;
+    [SerializeField] private GameObject RadarCamera;
     List<GameObject> RadarObjects;
     List<GameObject> BorderObjects;
 
@@ -20,6 +21,7 @@ public class RadarTracking : MonoBehaviour
     }
     private void Update()
     {
+        RadarCameraFollowPlayer();
 
         for (int i = 0; i < RadarObjects.Count; i++)
         {
@@ -53,5 +55,11 @@ public class RadarTracking : MonoBehaviour
             GameObject BorderObjectInstance = Instantiate(RadarTrashPrefab, o.transform.position, Quaternion.identity) as GameObject;
             BorderObjects.Add(BorderObjectInstance);
         }
+    }
+
+    void RadarCameraFollowPlayer()
+    {
+        RadarCamera.transform.position = new Vector3(transform.position.x, transform.position.y+RadarDistance, transform.position.z);
+        RadarCamera.transform.rotation = Quaternion.Euler(90, transform.eulerAngles.y, transform.eulerAngles.z);
     }
 }

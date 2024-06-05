@@ -37681,12 +37681,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 799692388}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 1, y: 100, z: 1}
+  m_LocalPosition: {x: 0.99, y: 122.91616, z: -20.641098}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1747172336}
-  m_RootOrder: 3
+  m_Father: {fileID: 2119264961}
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!81 &799692390
 AudioListener:
@@ -79725,7 +79725,6 @@ Transform:
   - {fileID: 1096373757}
   - {fileID: 1967688900}
   - {fileID: 694617468}
-  - {fileID: 799692389}
   m_Father: {fileID: 2119264961}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -79841,6 +79840,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BorderDistance: 45
+  RadarDistance: 100
   RadarTrashPrefab: {fileID: 7413924914488842746, guid: d4148e61bf313a648b9946b853483e39, type: 3}
   RadarTransform: {fileID: 836942441}
   TrashObjects:
@@ -79849,7 +79849,7 @@ MonoBehaviour:
   - {fileID: 713259787}
   - {fileID: 1666651481}
   - {fileID: 2115150967}
-  CameraRadar: {fileID: 799692388}
+  RadarCamera: {fileID: 799692388}
 --- !u!1 &1747816947 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 31a607907c1042a4a917921c91078b81, type: 3}
@@ -99012,6 +99012,7 @@ Transform:
   - {fileID: 307631214}
   - {fileID: 905396095}
   - {fileID: 836942441}
+  - {fileID: 799692389}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
