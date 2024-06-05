@@ -6,8 +6,10 @@ using UnityEngine.UI;
 
 public class VacuumWaste : MonoBehaviour
 {
+    [SerializeField] private float VacuumSpeed;
     [SerializeField] private Slider ProgressHandle;
     [SerializeField] private GameObject ToxicArea;
+    [SerializeField] private GameObject Progress;
     void Start()
     {
         
@@ -25,7 +27,7 @@ public class VacuumWaste : MonoBehaviour
         if (other.gameObject.tag == "Toxic")
         {
             SubControl.SubControlScript.IsInToxicArea = true;
-            Debug.Log("INSIDE TOXIC STUFF");
+            //Debug.Log("INSIDE TOXIC STUFF");
         }
 
     }
@@ -35,7 +37,8 @@ public class VacuumWaste : MonoBehaviour
     {
         if ((SubControl.SubControlScript.IsInToxicArea == true) && (Input.GetKey(Controls.ControlsScript.Vacuum)))
         {
-            ProgressHandle.value++;
+            Progress.SetActive(true);
+            ProgressHandle.value += VacuumSpeed * Time.deltaTime;
             //Debug.Log("Vacuum");
         }
         if ((SubControl.SubControlScript.IsInToxicArea == false) && (Input.GetKeyDown(Controls.ControlsScript.Vacuum)))
@@ -47,6 +50,7 @@ public class VacuumWaste : MonoBehaviour
     {
         if (other.gameObject.tag == "Toxic")
         {
+            Progress.SetActive(false);
             SubControl.SubControlScript.IsInToxicArea = false;
         }
     }
@@ -54,8 +58,9 @@ public class VacuumWaste : MonoBehaviour
     //retains progress of the vacuuming
     private void VacuumProgression()
     {
-        if (ProgressHandle.value == 1)
+        if (ProgressHandle.value == 100)
         {
+            Progress.SetActive(false);
             GameObject.Destroy(ToxicArea);
         }
     }
