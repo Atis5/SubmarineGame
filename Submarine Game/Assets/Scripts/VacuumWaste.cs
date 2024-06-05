@@ -19,10 +19,14 @@ public class VacuumWaste : MonoBehaviour
     {
         AreaInteraction();
         VacuumProgression();
+
+  
     }
 
+
+    // UNNECESSARY \/ \/ \/ 
     //does not work atm
-    private void OnTriggerEnter(Collider other)
+    /*private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Toxic")
         {
@@ -30,7 +34,7 @@ public class VacuumWaste : MonoBehaviour
             //Debug.Log("INSIDE TOXIC STUFF");
         }
 
-    }
+    }*/
 
     //Should allow player to interact when inside of the toxic area
     void AreaInteraction()
@@ -46,22 +50,33 @@ public class VacuumWaste : MonoBehaviour
             //Debug.Log("No Vacuuming allowed");
         }
     }
-    private void OnTriggerExit(Collider other)
+
+
+    // UNNECESSARY \/ \/ \/
+    /*private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.tag == "Toxic")
         {
             Progress.SetActive(false);
             SubControl.SubControlScript.IsInToxicArea = false;
         }
-    }
+    }*/
+
+ 
 
     //retains progress of the vacuuming
     private void VacuumProgression()
     {
         if (ProgressHandle.value == 100)
         {
-            Progress.SetActive(false);
+            //Progress.SetActive(false); <-- UNNECESSARY
             GameObject.Destroy(ToxicArea);
+            SubControl.SubControlScript.IsInToxicArea = false;
+        }
+
+        if (SubControl.SubControlScript.IsInToxicArea == false)
+        {
+            Progress.SetActive(false);
         }
     }
     
