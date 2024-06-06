@@ -32145,7 +32145,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1747172336}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &694617469
 MonoBehaviour:
@@ -35306,6 +35306,40 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3792108299102785491, guid: da9582c7586757d4f94c7bc73b260e25, type: 3}
   m_PrefabInstance: {fileID: 3687039710645175492}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &776553813
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 776553814}
+  m_Layer: 0
+  m_Name: Radar-Related Objects
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &776553814
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 776553813}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 836942441}
+  - {fileID: 799692389}
+  - {fileID: 1096373757}
+  m_Father: {fileID: 2119264961}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &778998607
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -37681,12 +37715,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 799692388}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0.99, y: 122.91616, z: -20.641098}
+  m_LocalPosition: {x: 0.99, y: 200, z: -20.641098}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2119264961}
-  m_RootOrder: 7
+  m_Father: {fileID: 776553814}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!81 &799692390
 AudioListener:
@@ -40045,8 +40079,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2119264961}
-  m_RootOrder: 6
+  m_Father: {fileID: 776553814}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &837207013
 PrefabInstance:
@@ -49872,7 +49906,7 @@ GameObject:
   - component: {fileID: 1096373759}
   - component: {fileID: 1096373758}
   m_Layer: 3
-  m_Name: Player On Radar
+  m_Name: Player Dot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -49886,12 +49920,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1096373756}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.26, y: 1, z: 1.3}
-  m_LocalScale: {x: 5, y: 5, z: 5}
+  m_LocalPosition: {x: 0.24999999, y: 23.916159, z: -20.341099}
+  m_LocalScale: {x: 10, y: 10, z: 10}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 1747172336}
-  m_RootOrder: 0
+  m_Father: {fileID: 776553814}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!135 &1096373758
 SphereCollider:
@@ -79722,7 +79756,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
-  - {fileID: 1096373757}
   - {fileID: 1967688900}
   - {fileID: 694617468}
   m_Father: {fileID: 2119264961}
@@ -79839,8 +79872,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28b2dc4c9fe06ea49be4fd086b0031e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BorderDistance: 45
-  RadarDistance: 100
+  BorderDistance: 85
+  RadarDistance: 200
   RadarTrashPrefab: {fileID: 7413924914488842746, guid: d4148e61bf313a648b9946b853483e39, type: 3}
   RadarTransform: {fileID: 836942441}
   TrashObjects:
@@ -79850,6 +79883,7 @@ MonoBehaviour:
   - {fileID: 1666651481}
   - {fileID: 2115150967}
   RadarCamera: {fileID: 799692388}
+  PlayerDot: {fileID: 1096373756}
 --- !u!1 &1747816947 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 31a607907c1042a4a917921c91078b81, type: 3}
@@ -91644,7 +91678,7 @@ Transform:
   - {fileID: 559468211}
   - {fileID: 1299291799}
   m_Father: {fileID: 1747172336}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1967926562 stripped
 GameObject:
@@ -99011,8 +99045,7 @@ Transform:
   - {fileID: 953662855}
   - {fileID: 307631214}
   - {fileID: 905396095}
-  - {fileID: 836942441}
-  - {fileID: 799692389}
+  - {fileID: 776553814}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
