@@ -204,21 +204,21 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3092788}
-  m_LocalRotation: {x: 0.20816176, y: -0.124657735, z: 0.026758442, w: 0.96974903}
-  m_LocalPosition: {x: 0, y: 0, z: -0.7}
-  m_LocalScale: {x: 0.9, y: 0.81, z: 0.9}
-  m_ConstrainProportionsScale: 0
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -29.948723}
+  m_LocalScale: {x: 0.75, y: 0.75, z: 0.75}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1959139292}
   - {fileID: 1832072659}
   m_Father: {fileID: 953662855}
   m_RootOrder: 8
-  m_LocalEulerAnglesHint: {x: 24.23, y: -14.65, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 742.8, y: -333.80005}
+  m_AnchoredPosition: {x: 703.9338, y: -374.8358}
   m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0, y: 0}
 --- !u!114 &3092790
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36109,7 +36109,7 @@ GameObject:
   m_Component:
   - component: {fileID: 776553814}
   m_Layer: 0
-  m_Name: Radar-Related Objects
+  m_Name: Radar-Related
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -36127,7 +36127,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 836942441}
   - {fileID: 799692389}
   - {fileID: 1096373757}
   m_Father: {fileID: 2119264961}
@@ -38513,7 +38512,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 776553814}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!81 &799692390
 AudioListener:
@@ -38542,8 +38541,8 @@ Camera:
   m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.78
-    y: -0.62
+    x: 0.774
+    y: -0.625
     width: 1
     height: 1
   near clip plane: 0.3
@@ -40868,11 +40867,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 836942440}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.01, y: 22.916159, z: -21.641098}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -0.025999999, y: -0.1, z: -0.12999992}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 776553814}
+  m_Father: {fileID: 1096373757}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &837207013
@@ -50827,9 +50826,10 @@ Transform:
   m_LocalPosition: {x: 0.24999999, y: 23.916159, z: -20.341099}
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_ConstrainProportionsScale: 1
-  m_Children: []
+  m_Children:
+  - {fileID: 836942441}
   m_Father: {fileID: 776553814}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!135 &1096373758
 SphereCollider:
@@ -81185,8 +81185,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28b2dc4c9fe06ea49be4fd086b0031e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BorderDistance: 120
-  RadarDistance: 200
+  BorderDistance: 128
+  RadarDistance: 240
   RadarTrashPrefab: {fileID: 7413924914488842746, guid: d4148e61bf313a648b9946b853483e39, type: 3}
   RadarTransform: {fileID: 836942441}
   TrashObjects:
