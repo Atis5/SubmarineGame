@@ -4,13 +4,18 @@ using UnityEngine;
 
 public class RadarTracking : MonoBehaviour
 {
+    [Header ("Properties")]
     [SerializeField] private float BorderDistance;
     [SerializeField] private float RadarDistance;
+
+    [Header("Referencecs")]
     [SerializeField] private GameObject RadarTrashPrefab;
     [SerializeField] private Transform RadarTransform;
     [SerializeField] private GameObject[] TrashObjects;
     [SerializeField] private GameObject RadarCamera;
     [SerializeField] private GameObject PlayerDot;
+
+    [Header("Properties")]
     List<GameObject> RadarObjects;
     List<GameObject> BorderObjects;
 
@@ -64,7 +69,12 @@ public class RadarTracking : MonoBehaviour
     {
         for (int i = 0; i < RadarObjects.Count; i++)
         {
-            if (Vector3.Distance(RadarObjects[i].transform.position, transform.position) > BorderDistance)
+            if (Vector3.Distance(RadarObjects[i].transform.position, transform.position) > RadarDistance)
+            {
+                BorderObjects[i].layer = LayerMask.NameToLayer("Invisible");
+                RadarObjects[i].layer = LayerMask.NameToLayer("Invisible");
+            }
+            else if (Vector3.Distance(RadarObjects[i].transform.position, transform.position) > BorderDistance)
             {
                 RadarTransform.LookAt(RadarObjects[i].transform);
 
