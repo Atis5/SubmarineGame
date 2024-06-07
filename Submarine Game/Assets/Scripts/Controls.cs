@@ -19,6 +19,7 @@ public class Controls : MonoBehaviour
     public KeyCode PickUp;
     public KeyCode Defense;
     public KeyCode Vacuum;
+    public KeyCode Pause;
 
     // Start is called before the first frame update
     void Start()
