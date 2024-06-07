@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: fca2c91dc07c292479123ac6bf946143
+guid: a6faa88f3cbff454dbbbd851be1c11e9
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
@@ -13,17 +13,12 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Material.006
-    second: {fileID: 2100000, guid: cf8ada993387a9e46999b52dd72abef4, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: RadarGlass
-    second: {fileID: 2100000, guid: c12576a115b2974489ef04f4cfe84a7f, type: 2}
+    second: {fileID: 2100000, guid: 4c2087826f277cb43beb6caef1bf1cd6, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: RadarHull
-    second: {fileID: 2100000, guid: d8eaefa4f773f2f4885ea4265d06b97f, type: 2}
+    second: {fileID: 2100000, guid: f2c5616fca3cba64a947df07994104ae, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
