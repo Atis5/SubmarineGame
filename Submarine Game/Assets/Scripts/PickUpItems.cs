@@ -137,6 +137,7 @@ public class PickUpItems : MonoBehaviour
         HeldObject.transform.position = TrashCollector.transform.position;
         HeldObjectRigidbody.useGravity = true;
         HeldObject = null;
+        IsHolding = false;
     }
 
 
