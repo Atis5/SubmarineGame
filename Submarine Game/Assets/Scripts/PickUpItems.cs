@@ -1,33 +1,37 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class PickUpItems : MonoBehaviour
 {
     [Header ("Properties")]
     public float PickUpRange; // How far you need to be from an item to pick it up.
-    public float PickUpCooldown;
+    public float PickUpCooldown; // How much time needs to pass before player can drop object after picking it up.
     public float GrabArmStrength; // How quickly objects will be pulled towards the player.
     public Color MarkColor; // What color will the items turn when they are pickable.
 
     [Header ("References")]
-    public GameObject SubmarineCollision; // Reference to the collision of our player.
-    public Transform HoldPosition; // This is where items you pick up will be.
+    [SerializeField] private TextMeshProUGUI TrashCollected; // Text that shows how much trash was collected.
+    [SerializeField] private TextMeshProUGUI TrashCounter; // Text that shows how much trash was collected.
+    [SerializeField] private GameObject SubmarineCollision; // Reference to the collision of our player.
+    [SerializeField] private Transform HoldPosition; // This is where items you pick up will be.
+    [SerializeField] private GameObject TrashBin; // Not used right now.
+    [SerializeField] private Transform TrashCollector; // Not used right now.
+    [SerializeField] private Camera MainCamera; // 1st Person Camera reference
     private GameObject HeldObject; // References whatever object player is holding.
     private Rigidbody HeldObjectRigidbody; // Rigidbody reference.
-    public GameObject TrashBin; // Not used right now.
-    public Transform TrashCollector; // Not used right now.
-    public Camera MainCamera; // 1st Person Camera reference
-    
+
 
     [Header ("Necessary Variables")]
     public static PickUpItems PickUpScript; // Allows us to reference this script in other scripts.
+    public float CollectedTrashCount = 0;
     private bool IsInteracting = false; // Needed for MarkPickabkleObjects method
     private bool IsHolding = false;
     private GameObject LastObject; // Needed for MarkPickabkleObjects method
     private Color LastObjectColor; // Needed for MarkPickabkleObjects method
     private float CurrentGrabArmStrength;
-    public float CurrentPickUpCooldown;
+    private float CurrentPickUpCooldown;
 
 
 
@@ -35,6 +39,10 @@ public class PickUpItems : MonoBehaviour
     private void Start()
     {
         PickUpScript = this;
+
+        // Make text invisible.
+        TrashCollected.CrossFadeAlpha(0.0f, 0.05f, false);
+        TrashCounter.CrossFadeAlpha(0.0f, 0.05f, false);
     }
 
 
@@ -43,7 +51,6 @@ public class PickUpItems : MonoBehaviour
         MarkPickableObjects();
         ObjectInteraction();
 
- 
     }
 
     void FixedUpdate()
@@ -100,6 +107,8 @@ public class PickUpItems : MonoBehaviour
 
                 // Teleport trash to the trash bin.
                 Invoke("SecureTrash", 1);
+
+                
             }
 
         }
@@ -132,6 +141,10 @@ public class PickUpItems : MonoBehaviour
     }
 
 
+
+
+
+
     /// <summary>
     /// Teleports trash items towards the trash bin.
     /// </summary>
@@ -142,7 +155,17 @@ public class PickUpItems : MonoBehaviour
         HeldObjectRigidbody.useGravity = true;
         HeldObject = null;
         IsHolding = false;
+
+        // Adds +1 to collected trash.
+        CollectedTrashCount++;
+        TrashCounter.text = CollectedTrashCount.ToString();
+
+        // Enable subtitles.
+        TrashCollected.CrossFadeAlpha(1.0f, 0.05f, false);
+        TrashCounter.CrossFadeAlpha(1.0f, 0.05f, false);
+
     }
+
 
 
     /// <summary>
