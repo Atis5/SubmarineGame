@@ -79,7 +79,7 @@ public class PickUpItems : MonoBehaviour
     }
 
 
-    void PickUpObject(GameObject PickableObject)
+    public void PickUpObject(GameObject PickableObject)
     {
         if (PickableObject.GetComponent<Rigidbody>())
         {
@@ -87,14 +87,19 @@ public class PickUpItems : MonoBehaviour
             HeldObjectRigidbody = PickableObject.GetComponent<Rigidbody>();
             CurrentGrabArmStrength += GrabArmStrength * Time.deltaTime;
             HeldObject.transform.position = Vector3.MoveTowards(HeldObject.transform.position, HoldPosition.transform.position, CurrentGrabArmStrength);
-            if (HeldObject.transform.position == HoldPosition.transform.position)
+
+            // Stick object to the player's Hold Position when it's close enough.
+            if (Vector3.Distance(HeldObject.transform.position, HoldPosition.transform.position) < 5)
             {
                 HeldObject.transform.position = HoldPosition.transform.position;
                 HeldObjectRigidbody.isKinematic = true;
                 HeldObjectRigidbody.transform.parent = HoldPosition.transform;
                 Physics.IgnoreCollision(HeldObject.GetComponent<Collider>(), SubmarineCollision.GetComponent<Collider>(), true);
                 IsHolding = true;
-                CurrentGrabArmStrength = GrabArmStrength;
+                CurrentGrabArmStrength = 0;
+
+                // Teleport trash to the trash bin.
+                Invoke("SecureTrash", 1);
             }
 
         }
@@ -132,7 +137,6 @@ public class PickUpItems : MonoBehaviour
     /// </summary>
     public void SecureTrash()
     {
-        Physics.IgnoreCollision(HeldObject.GetComponent<Collider>(), SubmarineCollision.GetComponent<Collider>(), false);
         HeldObjectRigidbody.isKinematic = false;
         HeldObject.transform.position = TrashCollector.transform.position;
         HeldObjectRigidbody.useGravity = true;
