@@ -30586,11 +30586,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 968ca92dabab4cd47aec4a3883b64958, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hundred: {fileID: 0}
-  eighty: {fileID: 0}
-  sixty: {fileID: 0}
-  forty: {fileID: 0}
-  twenty: {fileID: 0}
+  hundred: {fileID: 451344081505024857}
+  eighty: {fileID: 2117580612}
+  sixty: {fileID: 1142681472}
+  forty: {fileID: 2139232107}
+  twenty: {fileID: 843133084}
 --- !u!1001 &1444100131
 PrefabInstance:
   m_ObjectHideFlags: 0
