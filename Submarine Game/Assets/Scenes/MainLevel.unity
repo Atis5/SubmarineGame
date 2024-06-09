@@ -32956,8 +32956,9 @@ MonoBehaviour:
   PickUpCooldown: 50
   GrabArmStrength: 0.1
   MarkColor: {r: 1, g: 0, b: 0, a: 1}
-  TrashCollected: {fileID: 1474105219}
-  TrashCounter: {fileID: 774446403}
+  TrashCollected: {fileID: 1474105217}
+  TrashCounterObject: {fileID: 774446401}
+  TrashCounterText: {fileID: 774446403}
   SubmarineCollision: {fileID: 1591090806}
   HoldPosition: {fileID: 291131983}
   TrashBin: {fileID: 55711492}
@@ -35972,6 +35973,7 @@ GameObject:
   - component: {fileID: 774446402}
   - component: {fileID: 774446404}
   - component: {fileID: 774446403}
+  - component: {fileID: 774446405}
   m_Layer: 5
   m_Name: Trash Counter
   m_TagString: Untagged
@@ -36096,6 +36098,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 774446401}
   m_CullTransparentMesh: 1
+--- !u!114 &774446405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 774446401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 589c2e030c8913c42a33ae8eecabc145, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TextAlpha: 1
+  FadeTime: 5
 --- !u!4 &775226532 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3792108299102785491, guid: da9582c7586757d4f94c7bc73b260e25, type: 3}
@@ -68869,13 +68885,14 @@ GameObject:
   - component: {fileID: 1474105218}
   - component: {fileID: 1474105220}
   - component: {fileID: 1474105219}
+  - component: {fileID: 1474105221}
   m_Layer: 5
   m_Name: Trash Collected
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1474105218
 RectTransform:
   m_ObjectHideFlags: 0
@@ -68994,6 +69011,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1474105217}
   m_CullTransparentMesh: 1
+--- !u!114 &1474105221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1474105217}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 589c2e030c8913c42a33ae8eecabc145, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TextAlpha: 1
+  FadeTime: 5
 --- !u!1001 &1476000568
 PrefabInstance:
   m_ObjectHideFlags: 0

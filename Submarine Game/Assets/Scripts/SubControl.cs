@@ -27,11 +27,11 @@ public class SubControl : MonoBehaviour
     [SerializeField] private TextMeshProUGUI HealthNumberText;
 
     [Header("Necessary Variables")]
+    public static SubControl SubControlScript; // Variable where the script reference is stored.
     public GameObject Player;
     public GameObject ToxicityWarning;
     public Collider SubmarineCollision; // Needed to make colliders work.
     private Rigidbody rb; // Reference to Rigidbody.
-    public static SubControl SubControlScript; // Variable where the script reference is stored.
     private bool ToxicityWarningIsActive = false;  // Checks if the method is running.
     public bool IsInToxicArea = false;
     public  float SubmarineSpeed = 0; // Influenced by Acceleration.

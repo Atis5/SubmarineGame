@@ -6,14 +6,16 @@ using TMPro;
 public class PickUpItems : MonoBehaviour
 {
     [Header ("Properties")]
-    public float PickUpRange; // How far you need to be from an item to pick it up.
-    public float PickUpCooldown; // How much time needs to pass before player can drop object after picking it up.
-    public float GrabArmStrength; // How quickly objects will be pulled towards the player.
-    public Color MarkColor; // What color will the items turn when they are pickable.
+    [SerializeField] private float PickUpRange; // How far you need to be from an item to pick it up.
+    [SerializeField] private float PickUpCooldown; // How much time needs to pass before player can drop object after picking it up.
+    [SerializeField] private float GrabArmStrength; // How quickly objects will be pulled towards the player.
+    [SerializeField] private Color MarkColor; // What color will the items turn when they are pickable.
+    
 
     [Header ("References")]
-    [SerializeField] private TextMeshProUGUI TrashCollected; // Text that shows how much trash was collected.
-    [SerializeField] private TextMeshProUGUI TrashCounter; // Text that shows how much trash was collected.
+    [SerializeField] private GameObject TrashCollected; // Text that shows how much trash was collected.
+    [SerializeField] private GameObject TrashCounterObject; // Text that shows how much trash was collected.
+    [SerializeField] private TextMeshProUGUI TrashCounterText; // Text that shows how much trash was collected.
     [SerializeField] private GameObject SubmarineCollision; // Reference to the collision of our player.
     [SerializeField] private Transform HoldPosition; // This is where items you pick up will be.
     [SerializeField] private GameObject TrashBin; // Not used right now.
@@ -21,7 +23,6 @@ public class PickUpItems : MonoBehaviour
     [SerializeField] private Camera MainCamera; // 1st Person Camera reference
     private GameObject HeldObject; // References whatever object player is holding.
     private Rigidbody HeldObjectRigidbody; // Rigidbody reference.
-
 
     [Header ("Necessary Variables")]
     public static PickUpItems PickUpScript; // Allows us to reference this script in other scripts.
@@ -35,15 +36,15 @@ public class PickUpItems : MonoBehaviour
 
 
 
-
     private void Start()
     {
         PickUpScript = this;
 
         // Make text invisible.
-        TrashCollected.CrossFadeAlpha(0.0f, 0.05f, false);
-        TrashCounter.CrossFadeAlpha(0.0f, 0.05f, false);
+        /*TrashCollected.CrossFadeAlpha(0.0f, 0.05f, false);
+        TrashCounter.CrossFadeAlpha(0.0f, 0.05f, false);*/
     }
+
 
 
     void Update()
@@ -53,6 +54,7 @@ public class PickUpItems : MonoBehaviour
 
     }
 
+
     void FixedUpdate()
     {
         if (CurrentPickUpCooldown <= PickUpCooldown)
@@ -60,6 +62,7 @@ public class PickUpItems : MonoBehaviour
             CurrentPickUpCooldown++;
         }
     }
+
 
 
     /// <summary>
@@ -84,6 +87,7 @@ public class PickUpItems : MonoBehaviour
             }
         }
     }
+
 
 
     public void PickUpObject(GameObject PickableObject)
@@ -115,6 +119,7 @@ public class PickUpItems : MonoBehaviour
     }
 
 
+
     public void DropObject()
     {
         Physics.IgnoreCollision(HeldObject.GetComponent<Collider>(), SubmarineCollision.GetComponent<Collider>(), false);
@@ -142,9 +147,6 @@ public class PickUpItems : MonoBehaviour
 
 
 
-
-
-
     /// <summary>
     /// Teleports trash items towards the trash bin.
     /// </summary>
@@ -156,14 +158,13 @@ public class PickUpItems : MonoBehaviour
         HeldObject = null;
         IsHolding = false;
 
-        // Adds +1 to collected trash.
+        // Add +1 to collected trash.
         CollectedTrashCount++;
-        TrashCounter.text = CollectedTrashCount.ToString();
+        TrashCounterText.text = CollectedTrashCount.ToString();
 
-        // Enable subtitles.
-        TrashCollected.CrossFadeAlpha(1.0f, 0.05f, false);
-        TrashCounter.CrossFadeAlpha(1.0f, 0.05f, false);
-
+        // Enable text trash collecting text.
+        TrashCollected.SetActive(true);
+        TrashCounterObject.SetActive(true);
     }
 
 
