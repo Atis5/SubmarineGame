@@ -46293,7 +46293,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dies: 0
-  Playerposition: {fileID: 0}
+  Playerposition: {fileID: 1435483564}
   direction: 3
   target: 0
   enemydelay: 0
