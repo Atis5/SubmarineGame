@@ -30,11 +30,11 @@ public class DoorOpenController : MonoBehaviour
             StartCoroutine(pauseDoorInteraction());
         }
 
-        else if (doorOpen && pauseInteraction)
-        {
-            doorAnim.Play(closeAnimationName, 0, 0.0f);
-            doorOpen = false;
-            StartCoroutine(pauseDoorInteraction());
-        }
+        //else if (doorOpen && pauseInteraction)
+        //{
+        //    doorAnim.Play(closeAnimationName, 0, 0.0f);
+        //    doorOpen = false;
+        //    StartCoroutine(pauseDoorInteraction());
+        //}
     }
 }
