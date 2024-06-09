@@ -4922,7 +4922,7 @@ GameObject:
   - component: {fileID: 1355050720493368036}
   - component: {fileID: 6141951192048300575}
   m_Layer: 0
-  m_Name: ToxicArea 1
+  m_Name: ToxicArea
   m_TagString: Toxic
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
