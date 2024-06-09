@@ -21036,6 +21036,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ValveButtonDES (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8863367434314212803, guid: 731946c51fcb69b4eb3c6d8a5f278407, type: 3}
+      propertyPath: m_Name
+      value: Valve_M
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 731946c51fcb69b4eb3c6d8a5f278407, type: 3}
 --- !u!1001 &1299774751
@@ -28886,7 +28890,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 731946c51fcb69b4eb3c6d8a5f278407, type: 3}
       propertyPath: m_Name
-      value: ValveButtonDES
+      value: Valve_M
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 731946c51fcb69b4eb3c6d8a5f278407, type: 3}
@@ -31276,7 +31280,7 @@ GameObject:
   - component: {fileID: 8918280150299530085}
   - component: {fileID: 8918280150299530086}
   m_Layer: 0
-  m_Name: Door
+  m_Name: Door_M
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31294,7 +31298,7 @@ GameObject:
   - component: {fileID: 8103695659485212773}
   - component: {fileID: 8918280150677226200}
   m_Layer: 0
-  m_Name: Door
+  m_Name: Door_T
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
