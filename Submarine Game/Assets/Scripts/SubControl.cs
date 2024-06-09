@@ -38,7 +38,7 @@ public class SubControl : MonoBehaviour
     private float SubmarineDepth;
     private float ToxicityNumber = 10;
     private float CurrentBumpForce; // Influenced by BumpForce
-    private float CurrentHealth;
+    public float CurrentHealth;
 
 
 

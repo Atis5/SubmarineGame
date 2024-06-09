@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Battery4
+  m_Name: Battery5
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
   m_ValidKeywords:
   - _EMISSION
@@ -77,5 +77,5 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _Color: {r: 0.8862746, g: 0, b: 0, a: 1}
-    - _EmissionColor: {r: 2, g: 0.059356738, b: 0, a: 1}
+    - _EmissionColor: {r: 0.031047244, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []
