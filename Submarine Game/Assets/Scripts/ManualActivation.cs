@@ -24,13 +24,11 @@ public class ManualActivation : MonoBehaviour
     {
         if (Input.GetKeyDown(Controls.ControlsScript.Manual))
         {
-            Debug.Log("manual");
             ManualActive.SetActive(true);
             HUD.SetActive(false);
         }
         if (Input.GetKeyUp(Controls.ControlsScript.Manual))
         {
-            Debug.Log("manual off");
             ManualActive.SetActive(false);
             HUD.SetActive(true);
         }
