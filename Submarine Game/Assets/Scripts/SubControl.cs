@@ -230,12 +230,15 @@ public class SubControl : MonoBehaviour
         ToxicityWarningIsActive = false;
     }
 
+
+
     private void ShowDepth()
     {
         // Show submarine depth
         SubmarineDepth = Player.transform.position.y;
         SubmarineDepthText.text = Mathf.Round(SubmarineDepth - 1000).ToString() + " m";
     }
+
 
 
     private void MaxAndMinHealth()
@@ -250,6 +253,8 @@ public class SubControl : MonoBehaviour
             }
         }
 
+
+
     // Bumping and tilting when hitting obstacles.
     private void OnCollisionEnter(Collision collision)
     {
@@ -260,8 +265,8 @@ public class SubControl : MonoBehaviour
             HealthNumberText.text = Mathf.Round(CurrentHealth).ToString();
             SubmarineSpeed = 0;
             rb.AddForce(transform.forward * CurrentBumpForce);
-            rb.AddTorque(transform.forward * -CurrentBumpForce);
-            rb.AddTorque(transform.up * -CurrentBumpForce /2);
+            rb.AddTorque(transform.forward * CurrentBumpForce);
+            rb.AddTorque(transform.up * -CurrentBumpForce /4);
             CurrentBumpForce = 0;
         }
     }
