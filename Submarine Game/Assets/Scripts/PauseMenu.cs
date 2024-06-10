@@ -8,6 +8,7 @@ public class PauseMenu : MonoBehaviour
     public static bool GameIsPaused = false;
     public GameObject pauseMenuUI;
     public GameObject HUD;
+    public 
 
     void Update()
     { 
@@ -31,6 +32,7 @@ public class PauseMenu : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         HUD.SetActive(true);
+        AudioListener.pause = false;
     }
 
      private void Pause()
@@ -41,7 +43,9 @@ public class PauseMenu : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         HUD.SetActive(false);
+        AudioListener.pause = true;
     }
+
     public void MainMenu()
     {
         Time.timeScale = 1f;
