@@ -25,6 +25,7 @@ public class DoorOpenController : MonoBehaviour
     {
         if (!doorOpen && !pauseInteraction)
         {
+            EnemySpawner.enemySpawner.IsSpawning = true;
             doorAnim.Play(openAnimationName, 0, 0.0f);
             doorOpen = true;
             StartCoroutine(pauseDoorInteraction());

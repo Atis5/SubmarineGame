@@ -13,7 +13,7 @@ public class EnemySpawner : MonoBehaviour
     void Start()
     {
         enemySpawner = this;
-        IsSpawning = true;
+        //IsSpawning = true;
     }
 
     

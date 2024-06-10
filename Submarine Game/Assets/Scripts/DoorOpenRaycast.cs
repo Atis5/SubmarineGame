@@ -42,6 +42,7 @@ public class DoorOpenRaycast : MonoBehaviour
 
                 if(Input.GetKeyDown(openDoorKey))
                 {
+                   
                     raycastedObj.PlayAnimation();
                 }
             }
