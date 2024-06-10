@@ -20,6 +20,7 @@ public class Controls : MonoBehaviour
     public KeyCode Defense;
     public KeyCode Vacuum;
     public KeyCode Pause;
+    public KeyCode Manual;
 
     // Start is called before the first frame update
     void Start()
