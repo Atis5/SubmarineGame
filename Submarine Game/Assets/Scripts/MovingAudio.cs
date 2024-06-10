@@ -9,7 +9,7 @@ public class MovingAudio : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(Controls.ControlsScript.Forward))
+        if ((Input.GetKey(Controls.ControlsScript.Forward)) || (Input.GetKey(Controls.ControlsScript.Backward)))
         {
             MovingSound.enabled = true;
         }
