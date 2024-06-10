@@ -36508,7 +36508,7 @@ MonoBehaviour:
   RiseSpeed: 100
   StabilizationSmoothing: 0.05
   BumpForce: 30
-  MaxHealth: 300
+  MaxHealth: 10
   SubmarineSpeedText: {fileID: 773240974}
   SubmarineDepthText: {fileID: 1399348659}
   ToxicityNumberText: {fileID: 1645521554}

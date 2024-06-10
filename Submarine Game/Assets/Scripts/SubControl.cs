@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class SubControl : MonoBehaviour
 {
@@ -67,6 +68,7 @@ public class SubControl : MonoBehaviour
     {
         rb.AddTorque(transform.up * Input.GetAxis("Mouse X") * TurnSpeed/3);
         rb.AddTorque(transform.right * -Input.GetAxis("Mouse Y") * TurnSpeed/3);
+        DeathScreen();
     }
 
     void FixedUpdate()
@@ -206,6 +208,7 @@ public class SubControl : MonoBehaviour
                 StartCoroutine(ShowToxicityBlink());
                 ToxicityWarningIsActive = true;
             }
+
         }
         
     }
@@ -288,6 +291,15 @@ public class SubControl : MonoBehaviour
         if (other.gameObject.tag == "Toxic")
         {
             IsInToxicArea = false;
+        }
+    }
+
+    private void DeathScreen()
+    {
+        if (CurrentHealth <= 0)
+        {
+            Debug.Log("death");
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
     }
 
